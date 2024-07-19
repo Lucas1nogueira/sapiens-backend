@@ -1,13 +1,13 @@
-package com.sapiens.sapiensSoftware;
+package com.sapiens.sapiens;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SapiensSoftwareApplication {
+public class SapiensApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SapiensSoftwareApplication.class, args);
+		SpringApplication.run(SapiensApplication.class, args);
 	}
 
 }
