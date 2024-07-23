@@ -3,7 +3,6 @@ package com.sapiens.sapiens.controllers;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.sapiens.sapiens.domain.student.Student;
-import com.sapiens.sapiens.domain.user.User;
 import com.sapiens.sapiens.services.StudentService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -36,12 +35,12 @@ public class StudentController {
 
     @GetMapping("/matriculation/{matriculation}")
     public ResponseEntity<?> findBMatriculationEmail(@PathVariable String matriculation) {
-        return ResponseEntity.ok(studentService.findByMatriculation(matriculation));
+        return studentService.findByMatriculation(matriculation);
     }
 
     @GetMapping("/email/{email}")
     public ResponseEntity<?> findByEmail(@PathVariable String email) {
-        return ResponseEntity.ok(studentService.findByEmail(email));
+        return studentService.findByEmail(email);
     }
 
 }

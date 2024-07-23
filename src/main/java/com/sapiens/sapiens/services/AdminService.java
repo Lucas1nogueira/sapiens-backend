@@ -12,6 +12,6 @@ public class AdminService {
     private final AuthRepository authRepository;
 
     public ResponseEntity<?> findAll() {
-        return ResponseEntity.ok(authRepository.findAll());
+        return ResponseEntity.ok().body(authRepository.findAll());
     }
 }
