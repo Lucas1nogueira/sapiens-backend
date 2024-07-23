@@ -25,7 +25,7 @@ public class AuthService implements UserDetailsService {
         var userDB = (User) userRepository.findByEmail(user.email());
         var token = tokenService.generateToken(user.email());
 
-        return ResponseEntity.ok(new LoginResponse(user.email(), user.email(), token, userDB.getRole()));
+        return ResponseEntity.ok().body(new LoginResponse(user.email(), user.email(), token, userDB.getRole()));
     }
 
     public ResponseEntity<?> register(RegisterRequest user) {

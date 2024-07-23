@@ -14,11 +14,11 @@ public class StudentService {
     private final StudentRepository studentRepository;
 
     public ResponseEntity<?> save(Student student) {
-        return ResponseEntity.ok(studentRepository.save(student));
+        return ResponseEntity.ok().body(studentRepository.save(student));
     }
 
     public ResponseEntity<?> update(Student student) {
-        return ResponseEntity.ok(studentRepository.save(student));
+        return ResponseEntity.ok().body(studentRepository.save(student));
     }
     
     public ResponseEntity<?> findByMatriculation(String matriculation) {
