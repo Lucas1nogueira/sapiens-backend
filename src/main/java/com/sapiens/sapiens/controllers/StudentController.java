@@ -34,12 +34,12 @@ public class StudentController {
     }
 
     @GetMapping("/matriculation/{matriculation}")
-    public ResponseEntity<?> findBMatriculationEmail(@PathVariable String matriculation) {
+    public ResponseEntity<?> findBMatriculationEmail(@PathVariable("matriculation") String matriculation) {
         return studentService.findByMatriculation(matriculation);
     }
 
     @GetMapping("/email/{email}")
-    public ResponseEntity<?> findByEmail(@PathVariable String email) {
+    public ResponseEntity<?> findByEmail(@PathVariable("email") String email) {
         return studentService.findByEmail(email);
     }
 
