@@ -1,6 +1,7 @@
 package com.sapiens.sapiens.services;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import com.sapiens.sapiens.domain.student.Student;
 import com.sapiens.sapiens.infra.exceptions.BusinessException;
@@ -14,6 +15,15 @@ public class StudentService {
     private final StudentRepository studentRepository;
 
     public ResponseEntity<?> save(Student student) {
+        if (studentRepository.existsByEmail(student.getEmail())) {
+            throw new BusinessException("Email already exists");
+        }
+        
+        String encryptedPassword = new BCryptPasswordEncoder().encode(student.getPassword());
+
+        student.setPassword(encryptedPassword);
+        student.setFirstLogin(true);
+
         return ResponseEntity.ok().body(studentRepository.save(student));
     }
 
