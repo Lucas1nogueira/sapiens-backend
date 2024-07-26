@@ -6,7 +6,6 @@ import com.sapiens.sapiens.domain.student.Student;
 import com.sapiens.sapiens.services.StudentService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,9 +21,6 @@ public class StudentController {
 
     @PostMapping("/save")
     public ResponseEntity<?> save(@RequestBody Student student) {
-        String encryptedPassword = new BCryptPasswordEncoder().encode(student.getPassword());
-        student.setPassword(encryptedPassword);
-
         return studentService.save(student);
     }
 
