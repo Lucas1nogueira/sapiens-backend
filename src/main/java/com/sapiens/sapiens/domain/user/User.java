@@ -28,12 +28,14 @@ public class User implements UserDetails {
     private String email;
     private String password;
     private UserRole role;
+    private boolean firstLogin;
 
     public User(String name, String email, String password, UserRole role) {
         this.name = name;
         this.email = email;
         this.password = password;
         this.role = role;
+        this.firstLogin = true;
     }
 
     @Override

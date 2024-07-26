@@ -6,6 +6,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import com.sapiens.sapiens.domain.user.ChangePasswordRequest;
 import com.sapiens.sapiens.domain.user.LoginRequest;
 import com.sapiens.sapiens.domain.user.LoginResponse;
 import com.sapiens.sapiens.domain.user.RegisterRequest;
@@ -18,30 +19,50 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class AuthService implements UserDetailsService {
 
-    private final AuthRepository userRepository;
+    private final AuthRepository authRepository;
     private final TokenService tokenService;
 
     public ResponseEntity<?> login(LoginRequest user) {
-        var userDB = (User) userRepository.findByEmail(user.email());
+        var userDB = (User) authRepository.findByEmail(user.email());
         var token = tokenService.generateToken(user.email());
 
-        return ResponseEntity.ok().body(new LoginResponse(user.email(), user.email(), token, userDB.getRole()));
+        return ResponseEntity.ok().body(
+            new LoginResponse(user.email(), user.email(), token, userDB.getRole(), userDB.isFirstLogin()));
     }
 
     public ResponseEntity<?> register(RegisterRequest user) {
-        if (userRepository.existsByEmail(user.email())) {
+        if (authRepository.existsByEmail(user.email())) {
             throw new AuthException("User already exists");
         }
 
         String encryptedPassword = new BCryptPasswordEncoder().encode(user.password());
-        userRepository.save(new User(user.name(), user.email(), encryptedPassword, user.role()));
+        authRepository.save(new User(user.name(), user.email(), encryptedPassword, user.role()));
 
         return ResponseEntity.ok().build();
     }
 
+    // public ResponseEntity<?> refreshToken() {
+    //     return ResponseEntity.ok().body(tokenService.refreshToken());
+    // }
+
+    public ResponseEntity<?> changePassword(ChangePasswordRequest user) {
+        var userDB = authRepository.findUserByEmail(user.email())
+                .orElseThrow(() -> new AuthException("User not found"));
+
+        if (!userDB.isFirstLogin() && user.password().equals(user.newPassword())) {
+          throw new AuthException("New password cannot be the same as old password");
+        }
+
+        String encryptedNewPassword = new BCryptPasswordEncoder().encode(user.newPassword());
+        userDB.setPassword(encryptedNewPassword);
+        userDB.setFirstLogin(false);
+
+        return ResponseEntity.ok().body(authRepository.save(userDB));
+    }
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return userRepository.findByEmail(username);
+        return authRepository.findByEmail(username);
     }
 
 }
