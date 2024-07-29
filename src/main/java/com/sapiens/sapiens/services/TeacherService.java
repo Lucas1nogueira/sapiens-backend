@@ -44,4 +44,8 @@ public class TeacherService {
         return ResponseEntity.ok().body(teacher);
     }
 
+    public ResponseEntity<?> findAll() {
+        return ResponseEntity.ok().body(teacherRepository.findAll());
+    }
+
 }
