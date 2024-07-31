@@ -32,7 +32,7 @@ public class AuthService implements UserDetailsService {
 
     public ResponseEntity<?> register(RegisterRequest user) {
         if (authRepository.existsByEmail(user.email())) {
-            throw new AuthException("User already exists");
+            throw new AuthException("Usuario já existe");
         }
 
         String encryptedPassword = new BCryptPasswordEncoder().encode(user.password());
@@ -47,13 +47,19 @@ public class AuthService implements UserDetailsService {
 
     public ResponseEntity<?> changePassword(ChangePasswordRequest user) {
         var userDB = authRepository.findUserByEmail(user.email())
-                .orElseThrow(() -> new AuthException("User not found"));
+                .orElseThrow(() -> new AuthException("Usuario nao encontrado"));
+        
+        var encrypt = new BCryptPasswordEncoder();
 
-        if (!userDB.isFirstLogin() && user.password().equals(user.newPassword())) {
-          throw new AuthException("New password cannot be the same as old password");
+        if (!encrypt.matches(user.password(), userDB.getPassword())) {
+            throw new AuthException("A sua senha antiga está incorreta");
         }
 
-        String encryptedNewPassword = new BCryptPasswordEncoder().encode(user.newPassword());
+        if (!userDB.isFirstLogin() && user.password().equals(user.newPassword())) {
+          throw new AuthException("A nova senha deve ser diferente da antiga");
+        }
+
+        var encryptedNewPassword = encrypt.encode(user.newPassword());
         userDB.setPassword(encryptedNewPassword);
         userDB.setFirstLogin(false);
 
