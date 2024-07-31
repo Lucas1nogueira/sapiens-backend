@@ -49,10 +49,13 @@ public class AuthService implements UserDetailsService {
         var userDB = authRepository.findUserByEmail(user.email())
                 .orElseThrow(() -> new AuthException("Usuario nao encontrado"));
         
+        
         var encrypt = new BCryptPasswordEncoder();
-
-        if (!encrypt.matches(user.password(), userDB.getPassword())) {
-            throw new AuthException("A sua senha antiga está incorreta");
+        
+        if (!userDB.isFirstLogin()) {
+            if (!encrypt.matches(user.password(), userDB.getPassword())) {
+                throw new AuthException("A sua senha antiga está incorreta");
+            }
         }
 
         if (!userDB.isFirstLogin() && user.password().equals(user.newPassword())) {
