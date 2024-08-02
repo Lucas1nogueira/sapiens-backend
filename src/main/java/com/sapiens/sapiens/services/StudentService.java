@@ -16,7 +16,7 @@ public class StudentService {
 
     public ResponseEntity<?> save(Student student) {
         if (studentRepository.existsByEmail(student.getEmail())) {
-            throw new BusinessException("Email already exists");
+            throw new BusinessException("E-mail já registrado.");
         }
         
         String encryptedPassword = new BCryptPasswordEncoder().encode(student.getPassword());
@@ -33,14 +33,14 @@ public class StudentService {
     
     public ResponseEntity<?> findByMatriculation(String matriculation) {
         Student student = studentRepository.findByMatriculation(matriculation)
-            .orElseThrow(() -> new BusinessException("Student not found"));
+            .orElseThrow(() -> new BusinessException("Estudante não encontrado."));
         
         return ResponseEntity.ok().body(student);
     }
 
     public ResponseEntity<?> findByEmail(String email) {
         Student student = studentRepository.findByEmail(email)
-            .orElseThrow(() -> new BusinessException("Student not found"));
+            .orElseThrow(() -> new BusinessException("Estudante não encontrado."));
         
         return ResponseEntity.ok().body(student);
     }

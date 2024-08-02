@@ -23,19 +23,19 @@ public class DisciplineService {
 
     public ResponseEntity<?> delete(Discipline discipline) {
         disciplineRepository.delete(discipline);
-        return ResponseEntity.ok().body("Discipline was deleted");
+        return ResponseEntity.ok().body("Disciplina excluída com sucesso.");
     }
 
     public ResponseEntity<?> findByName(String name) {
         Discipline discipline = disciplineRepository.findByName(name)
-            .orElseThrow(() -> new BusinessException("Discipline not found"));
+            .orElseThrow(() -> new BusinessException("Disciplina não encontrada."));
         
         return ResponseEntity.ok().body(discipline);
     }
 
     public ResponseEntity<?> findByDisciplineCode(String disciplineCode) {
         Discipline discipline = disciplineRepository.findByDisciplineCode(disciplineCode)
-            .orElseThrow(() -> new BusinessException("Discipline not found"));
+            .orElseThrow(() -> new BusinessException("Disciplina não encontrada."));
         
         return ResponseEntity.ok().body(discipline);
     }
