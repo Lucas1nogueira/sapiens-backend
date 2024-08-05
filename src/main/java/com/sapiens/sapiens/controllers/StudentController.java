@@ -39,4 +39,9 @@ public class StudentController {
         return studentService.findByEmail(email);
     }
 
+    @GetMapping("/all")
+    public ResponseEntity<?> findAll() {
+        return studentService.findAll();
+    }
+
 }

@@ -45,4 +45,7 @@ public class StudentService {
         return ResponseEntity.ok().body(student);
     }
 
+    public ResponseEntity<?> findAll() {
+        return ResponseEntity.ok().body(studentRepository.findAll());
+    }
 }
