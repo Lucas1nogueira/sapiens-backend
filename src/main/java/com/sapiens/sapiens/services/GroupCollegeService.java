@@ -36,4 +36,8 @@ public class GroupCollegeService {
         return ResponseEntity.ok().body(groupCollegeRepository.findAll());
     }
 
+    public ResponseEntity<?> findByTeacherId(Long id) {
+        return ResponseEntity.ok().body(groupCollegeRepository.findByTeachersId(id));
+    }
+
 }

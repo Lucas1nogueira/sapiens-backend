@@ -1,8 +1,10 @@
 package com.sapiens.sapiens.domain.teacher;
 
 import com.sapiens.sapiens.domain.discipline.Discipline;
+import com.sapiens.sapiens.domain.groupCollege.GroupCollege;
 import com.sapiens.sapiens.domain.user.User;
 import jakarta.persistence.FetchType;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Entity;
 import lombok.EqualsAndHashCode;
@@ -24,5 +26,8 @@ public class Teacher extends User {
 
     @OneToMany(fetch = FetchType.LAZY)
     private List<Discipline> disciplines;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    private List<GroupCollege> groupColleges;
 
 }

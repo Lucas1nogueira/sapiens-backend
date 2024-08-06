@@ -39,4 +39,9 @@ public class GroupCollegeController {
         return groupCollegeService.findAll();
     }
 
+    @GetMapping("/teacher/{teacherId}")
+    public ResponseEntity<?> findByTeacherCode(@PathVariable("teacherId") Long id) {
+        return groupCollegeService.findByTeacherId(id);
+    }
+
 }
