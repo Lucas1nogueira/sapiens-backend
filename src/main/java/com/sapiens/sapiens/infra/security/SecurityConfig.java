@@ -39,7 +39,10 @@ public class SecurityConfig {
                         .requestMatchers("/api/discipline/delete").hasRole("ADMIN")
                         .requestMatchers("/api/discipline/all").hasAnyRole("ADMIN", "TEACHER", "STUDENT")
 
-                        .requestMatchers("/api/teacher/save").hasRole("ADMIN")
+                        .requestMatchers("/api/groupCollege/teacher/**").hasAnyRole("ADMIN", "TEACHER")
+                        .requestMatchers("/api/group/all").hasAnyRole("ADMIN", "TEACHER", "STUDENT")
+                        .requestMatchers("/api/groupCollege/**").hasRole("ADMIN")
+                        
                         .requestMatchers("/api/teacher/**").hasAnyRole("ADMIN", "TEACHER")
                         
                         .anyRequest().authenticated())

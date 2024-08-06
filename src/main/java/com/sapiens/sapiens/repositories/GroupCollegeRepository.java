@@ -4,6 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import com.sapiens.sapiens.domain.groupCollege.GroupCollege;
 import java.util.Optional;
+import java.util.List;
 
 @Repository
 public interface GroupCollegeRepository extends JpaRepository<GroupCollege, String> {
@@ -11,5 +12,7 @@ public interface GroupCollegeRepository extends JpaRepository<GroupCollege, Stri
     Optional<GroupCollege> findByGroupCode(String groupCode);
 
     boolean existsByGroupCode(String groupCode);
+
+    List<GroupCollege> findByTeachersId(Long id);
 
 }
