@@ -2,7 +2,6 @@ package com.sapiens.sapiens.controllers;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.sapiens.sapiens.domain.user.ChangePasswordRequest;
 import com.sapiens.sapiens.domain.user.LoginRequest;
 import com.sapiens.sapiens.domain.user.RegisterRequest;

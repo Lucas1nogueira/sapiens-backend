@@ -17,6 +17,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<?> globalExceptionHandler(Exception exception) {
+        exception.printStackTrace();
         return ResponseEntity.internalServerError().body("Erro interno. Tente novamente mais tarde.");
     }
 

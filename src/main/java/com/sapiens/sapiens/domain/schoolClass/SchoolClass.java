@@ -1,4 +1,4 @@
-package com.sapiens.sapiens.domain.groupCollege;
+package com.sapiens.sapiens.domain.schoolClass;
 
 import com.sapiens.sapiens.domain.discipline.Discipline;
 import com.sapiens.sapiens.domain.student.Student;
@@ -6,6 +6,7 @@ import com.sapiens.sapiens.domain.teacher.Teacher;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,11 +18,11 @@ import jakarta.persistence.ManyToMany;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class GroupCollege {
+@Table(name = "tb_school_classes")
+public class SchoolClass {
     
     @Id
-    private String groupCode;
-    private int studentAmount;
+    private String code;
 
     @OneToMany(fetch = FetchType.LAZY)
     private List<Student> students;

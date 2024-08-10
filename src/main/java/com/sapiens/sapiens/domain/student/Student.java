@@ -1,9 +1,11 @@
 package com.sapiens.sapiens.domain.student;
 
-import com.sapiens.sapiens.domain.groupCollege.GroupCollege;
+import com.sapiens.sapiens.domain.evaluation.Evaluation;
+import com.sapiens.sapiens.domain.schoolClass.SchoolClass;
 import com.sapiens.sapiens.domain.user.User;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.FetchType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -22,6 +24,8 @@ public class Student extends User {
     private String sex;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    private GroupCollege groupCollege;
+    private SchoolClass schoolClass;
     
+    @OneToOne(fetch = FetchType.EAGER)
+    private Evaluation evaluation;
 }

@@ -34,9 +34,9 @@ public class DisciplineController {
         return disciplineService.delete(discipline);
     }
 
-    @GetMapping("/disciplineCode/{disciplineCode}")
-    public ResponseEntity<?> findByDisciplineCode(@PathVariable("disciplineCode") String disciplineCode) {
-        return disciplineService.findByDisciplineCode(disciplineCode);
+    @GetMapping("/code/{code}")
+    public ResponseEntity<?> findByCode(@PathVariable("code") String code) {
+        return disciplineService.findByCode(code);
     }
 
     @GetMapping("/name/{name}")

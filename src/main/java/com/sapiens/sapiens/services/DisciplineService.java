@@ -33,8 +33,8 @@ public class DisciplineService {
         return ResponseEntity.ok().body(discipline);
     }
 
-    public ResponseEntity<?> findByDisciplineCode(String disciplineCode) {
-        Discipline discipline = disciplineRepository.findByDisciplineCode(disciplineCode)
+    public ResponseEntity<?> findByCode(String code) {
+        Discipline discipline = disciplineRepository.findByCode(code)
             .orElseThrow(() -> new BusinessException("Disciplina não encontrada."));
         
         return ResponseEntity.ok().body(discipline);

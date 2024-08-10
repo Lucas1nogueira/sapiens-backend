@@ -1,7 +1,7 @@
 package com.sapiens.sapiens.domain.teacher;
 
 import com.sapiens.sapiens.domain.discipline.Discipline;
-import com.sapiens.sapiens.domain.groupCollege.GroupCollege;
+import com.sapiens.sapiens.domain.schoolClass.SchoolClass;
 import com.sapiens.sapiens.domain.user.User;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.ManyToMany;
@@ -28,6 +28,6 @@ public class Teacher extends User {
     private List<Discipline> disciplines;
 
     @ManyToMany(fetch = FetchType.LAZY)
-    private List<GroupCollege> groupColleges;
+    private List<SchoolClass> schoolClasses;
 
 }
