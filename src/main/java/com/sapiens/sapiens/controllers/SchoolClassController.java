@@ -45,4 +45,9 @@ public class SchoolClassController {
         return schoolClassService.findByTeacherId(id);
     }
 
+    @GetMapping("/student/{studentId}")
+    public ResponseEntity<?> findByStudentId(@PathVariable("studentId") Long id) {
+        return schoolClassService.findByStudentId(id);
+    }
+
 }

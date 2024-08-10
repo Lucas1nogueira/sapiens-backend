@@ -40,4 +40,7 @@ public class SchoolClassService {
         return ResponseEntity.ok().body(schoolClassRepository.findByTeachersId(id));
     }
 
+    public ResponseEntity<?> findByStudentId(Long id) {
+        return ResponseEntity.ok().body(schoolClassRepository.findByStudentsId(id));
+    }
 }
