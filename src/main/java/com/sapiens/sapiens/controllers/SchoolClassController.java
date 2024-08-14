@@ -2,7 +2,6 @@ package com.sapiens.sapiens.controllers;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.sapiens.sapiens.domain.schoolClass.SchoolClass;
 import com.sapiens.sapiens.services.SchoolClassService;
 import lombok.AllArgsConstructor;
@@ -25,14 +24,19 @@ public class SchoolClassController {
         return schoolClassService.save(schoolClass);
     }
 
-    @PutMapping("/update")
-    public ResponseEntity<?> update(@RequestBody SchoolClass schoolClass) {
-        return schoolClassService.update(schoolClass);
+    @PutMapping("/assign-students")
+    public ResponseEntity<?> assignStudents(@RequestBody SchoolClass schoolClass) {
+        return schoolClassService.assignStudents(schoolClass);
+    }
+
+    @PutMapping("/assign-disciplines")
+    public ResponseEntity<?> updateDisciplines(@RequestBody SchoolClass schoolClass) {
+        return schoolClassService.assignDisciplines(schoolClass);
     }
 
     @GetMapping("/code/{code}")
-    public ResponseEntity<?> findByGroupCode(@PathVariable("groupCode") String code) {
-        return schoolClassService.findByGroupCode(code);
+    public ResponseEntity<?> findByCode(@PathVariable("code") String code) {
+        return schoolClassService.findByCode(code);
     }
 
     @GetMapping("/all")
@@ -40,14 +44,14 @@ public class SchoolClassController {
         return schoolClassService.findAll();
     }
 
-    @GetMapping("/teacher/{teacherId}")
-    public ResponseEntity<?> findByTeacherCode(@PathVariable("teacherId") Long id) {
-        return schoolClassService.findByTeacherId(id);
+    @GetMapping("/student/{id}")
+    public ResponseEntity<?> findByStudentId(@PathVariable("id") Long id) {
+        return schoolClassService.findByStudentId(id);
     }
 
-    @GetMapping("/student/{studentId}")
-    public ResponseEntity<?> findByStudentId(@PathVariable("studentId") Long id) {
-        return schoolClassService.findByStudentId(id);
+    @GetMapping("/students-discipline/{code}")
+    public ResponseEntity<?> findByDisciplineCode(@PathVariable("code") String code) {
+        return schoolClassService.findStudentsByDisciplineCode(code);
     }
 
 }

@@ -1,6 +1,8 @@
 package com.sapiens.sapiens.domain.discipline;
 
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.sapiens.sapiens.domain.evaluation.Evaluation;
 import com.sapiens.sapiens.domain.schoolClass.SchoolClass;
 import com.sapiens.sapiens.domain.teacher.Teacher;
@@ -30,8 +32,9 @@ public class Discipline {
 
     @ManyToOne(fetch = FetchType.EAGER)
     private SchoolClass schoolClass;
-
-    @OneToMany(fetch = FetchType.EAGER)
-    private List<Evaluation> evaluation;
+        
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "discipline")
+    private List<Evaluation> evaluations;
 
 }

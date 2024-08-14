@@ -29,9 +29,9 @@ public class TeacherController {
         return teacherService.update(teacher);
     }
 
-    @GetMapping("/teacherCode/{teacherCode}")
-    public ResponseEntity<?> findByTeacherCode(@PathVariable("teacherCode") String teacherCode) {
-        return teacherService.findByTeacherCode(teacherCode);
+    @GetMapping("/code/{code}")
+    public ResponseEntity<?> findByCode(@PathVariable("code") String code) {
+        return teacherService.findByCode(code);
     }
 
     @GetMapping("/email/{email}")

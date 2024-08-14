@@ -48,4 +48,8 @@ public class StudentService {
     public ResponseEntity<?> findAll() {
         return ResponseEntity.ok().body(studentRepository.findAll());
     }
+
+    public ResponseEntity<?> findBySchoolClassCode(String code) {
+        return ResponseEntity.ok().body(studentRepository.findBySchoolClassCode(code));
+    }
 }

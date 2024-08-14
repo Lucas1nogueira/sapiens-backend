@@ -30,8 +30,8 @@ public class TeacherService {
         return ResponseEntity.ok().body(teacherRepository.save(teacher));
     }
     
-    public ResponseEntity<?> findByTeacherCode(String teacherCode) {
-        Teacher teacher = teacherRepository.findByTeacherCode(teacherCode)
+    public ResponseEntity<?> findByCode(String code) {
+        Teacher teacher = teacherRepository.findByCode(code)
             .orElseThrow(() -> new BusinessException("Professor não encontrado."));
         
         return ResponseEntity.ok().body(teacher);

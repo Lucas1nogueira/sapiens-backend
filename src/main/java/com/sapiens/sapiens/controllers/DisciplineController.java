@@ -49,4 +49,14 @@ public class DisciplineController {
         return disciplineService.findAll();
     }
 
+    @GetMapping("/teacher/{id}")
+    public ResponseEntity<?> findByTeacherId(@PathVariable("id") Long id) {
+        return disciplineService.findByTeacherId(id);
+    }
+
+    @GetMapping("/class/{code}")
+    public ResponseEntity<?> findBySchoolClassCode(@PathVariable("code") String code) {
+        return disciplineService.findBySchoolClassCode(code);
+    }
+
 }

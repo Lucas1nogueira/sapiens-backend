@@ -34,5 +34,13 @@ public class EvaluationService {
     public ResponseEntity<?> findAll() {
         return ResponseEntity.ok().body(evaluationRepository.findAll());
     }
+
+    public ResponseEntity<?> findByDisciplineCode(String code) {
+        return ResponseEntity.ok().body(evaluationRepository.findByDisciplineCode(code));
+    }
+
+    public ResponseEntity<?> findByGradeId(Long id) {
+        return ResponseEntity.ok().body(evaluationRepository.findByGradesId(id));
+    }
     
 }

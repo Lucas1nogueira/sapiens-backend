@@ -44,4 +44,9 @@ public class StudentController {
         return studentService.findAll();
     }
 
+    @GetMapping("/class/{code}")
+    public ResponseEntity<?> findBySchoolClassCode(@PathVariable("code") String code) {
+        return studentService.findBySchoolClassCode(code);
+    }
+
 }

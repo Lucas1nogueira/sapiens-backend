@@ -1,8 +1,9 @@
 package com.sapiens.sapiens.domain.schoolClass;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 import com.sapiens.sapiens.domain.discipline.Discipline;
 import com.sapiens.sapiens.domain.student.Student;
-import com.sapiens.sapiens.domain.teacher.Teacher;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.OneToMany;
@@ -12,7 +13,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import java.util.List;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
 
 @Entity
 @Data
@@ -23,14 +23,13 @@ public class SchoolClass {
     
     @Id
     private String code;
-
-    @OneToMany(fetch = FetchType.LAZY)
+    
+    @JsonProperty(access = Access.WRITE_ONLY)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "schoolClass")
     private List<Student> students;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @JsonProperty(access = Access.WRITE_ONLY)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "schoolClass")
     private List<Discipline> disciplines;
-
-    @ManyToMany(fetch = FetchType.LAZY)
-    private List<Teacher> teachers;
     
 }

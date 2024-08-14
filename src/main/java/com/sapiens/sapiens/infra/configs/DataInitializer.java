@@ -14,12 +14,14 @@ public class DataInitializer {
     CommandLineRunner initializeData(AuthRepository authRepository, BCryptPasswordEncoder encoder) {
         return args -> {
             if (authRepository.findByRole(UserRole.ADMIN).isEmpty()) {
-                authRepository.save(new User(
+                var user = new User(
                     "Admin",
                     "admin@mail.com",
                     encoder.encode("admin123"),
                     UserRole.ADMIN
-                ));
+                );
+                user.setFirstLogin(false);
+                authRepository.save(user);
             }
         };
     }

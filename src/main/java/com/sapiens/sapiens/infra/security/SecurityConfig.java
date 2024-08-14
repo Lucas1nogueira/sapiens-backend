@@ -38,6 +38,8 @@ public class SecurityConfig {
                         .requestMatchers("/api/discipline/save").hasRole("ADMIN")
                         .requestMatchers("/api/discipline/delete").hasRole("ADMIN")
                         .requestMatchers("/api/discipline/all").hasAnyRole("ADMIN", "TEACHER", "STUDENT")
+                        .requestMatchers("/api/discipline/teacher/**").hasAnyRole("ADMIN", "TEACHER")
+                        .requestMatchers("/api/discipline/class/**").hasAnyRole("ADMIN", "TEACHER", "STUDENT")
 
                         .requestMatchers("/api/groupCollege/teacher/**").hasAnyRole("ADMIN", "TEACHER")
                         .requestMatchers("/api/group/all").hasAnyRole("ADMIN", "TEACHER", "STUDENT")

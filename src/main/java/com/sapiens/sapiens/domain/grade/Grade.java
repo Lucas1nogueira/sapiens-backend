@@ -1,15 +1,13 @@
 package com.sapiens.sapiens.domain.grade;
 
-import com.sapiens.sapiens.domain.discipline.Discipline;
 import com.sapiens.sapiens.domain.evaluation.Evaluation;
-
+import com.sapiens.sapiens.domain.student.Student;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -25,13 +23,12 @@ public class Grade {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
-    private Long value;
+    private Double value;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    private Discipline discipline;
+    private Student student;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     private Evaluation evaluation;
 
 }

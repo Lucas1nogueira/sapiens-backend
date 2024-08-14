@@ -39,4 +39,14 @@ public class EvaluationController {
         return evaluationService.findAll();
     }
 
+    @GetMapping("/discipline/{code}")
+    public ResponseEntity<?> findByDisciplineCode(@PathVariable("code") String code) {
+        return evaluationService.findByDisciplineCode(code);
+    }
+
+    @GetMapping("/grade/{id}")
+    public ResponseEntity<?> findByGradeId(@PathVariable("id") Long id) {
+        return evaluationService.findByGradeId(id);
+    }
+
 }

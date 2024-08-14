@@ -44,4 +44,12 @@ public class DisciplineService {
         return ResponseEntity.ok().body(disciplineRepository.findAll());
     }
 
+    public ResponseEntity<?> findByTeacherId(Long id) {
+        return ResponseEntity.ok().body(disciplineRepository.findByTeacherId(id));
+    }
+
+    public ResponseEntity<?> findBySchoolClassCode(String code) {
+        return ResponseEntity.ok().body(disciplineRepository.findBySchoolClassCode(code));
+    }
+
 }

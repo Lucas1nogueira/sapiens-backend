@@ -2,18 +2,18 @@ package com.sapiens.sapiens.domain.evaluation;
 
 import com.sapiens.sapiens.domain.discipline.Discipline;
 import com.sapiens.sapiens.domain.grade.Grade;
-import com.sapiens.sapiens.domain.student.Student;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import java.util.List;
 
 @Entity
 @Data
@@ -26,13 +26,10 @@ public class Evaluation {
     private Long id;
     private String name;
 
-    @OneToOne(fetch = FetchType.EAGER)
-    private Student student;
-
     @ManyToOne(fetch = FetchType.EAGER)
     private Discipline discipline;
 
-    @OneToOne(fetch = FetchType.EAGER)
-    private Grade grade;
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "evaluation")
+    private List<Grade> grades;
 
 }
