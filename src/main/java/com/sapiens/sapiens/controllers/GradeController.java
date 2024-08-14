@@ -19,9 +19,14 @@ public class GradeController {
 
     private final GradeService gradeService;
 
-    @PostMapping("/save")
+    @PostMapping("/save-one")
     public ResponseEntity<?> save(@RequestBody Grade grade) {
         return gradeService.save(grade);
+    }
+
+    @PostMapping("/save-many")
+    public ResponseEntity<?> save(@RequestBody Iterable<Grade> grades) {
+        return gradeService.save(grades);
     }
 
     @PutMapping("/update")

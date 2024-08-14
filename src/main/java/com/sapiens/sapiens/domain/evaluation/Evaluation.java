@@ -1,5 +1,6 @@
 package com.sapiens.sapiens.domain.evaluation;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.sapiens.sapiens.domain.discipline.Discipline;
 import com.sapiens.sapiens.domain.grade.Grade;
 import jakarta.persistence.Entity;
@@ -26,9 +27,11 @@ public class Evaluation {
     private Long id;
     private String name;
 
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @ManyToOne(fetch = FetchType.EAGER)
     private Discipline discipline;
-
+    
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "evaluation")
     private List<Grade> grades;
 
