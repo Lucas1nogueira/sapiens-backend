@@ -38,5 +38,9 @@ public class GradeService {
     public ResponseEntity<?> findAll() {
         return ResponseEntity.ok().body(gradeRepository.findAll());
     }
+
+    public ResponseEntity<?> findByStudentId(Long id) {
+        return ResponseEntity.ok().body(gradeRepository.findByStudentId(id));
+    }
     
 }
