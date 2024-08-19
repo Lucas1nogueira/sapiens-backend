@@ -25,7 +25,9 @@ public class Schedule {
     private Long id;
 
     private String day;
-    private String hour;
+    private String date;
+    private String startAt;
+    private String endAt;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @ManyToOne(fetch = FetchType.EAGER)
