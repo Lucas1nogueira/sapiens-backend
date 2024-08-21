@@ -49,4 +49,8 @@ public class GradeController {
         return gradeService.findByStudentId(id);
     }
 
+    @GetMapping("/evaluation/{id}")
+    public ResponseEntity<?> findByEvaluationId(@PathVariable("id") Long id) {
+        return gradeService.findByEvaluationId(id);
+    }
 }
