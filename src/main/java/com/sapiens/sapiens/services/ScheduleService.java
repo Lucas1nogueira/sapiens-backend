@@ -1,5 +1,8 @@
 package com.sapiens.sapiens.services;
 
+import java.util.HashSet;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import com.sapiens.sapiens.domain.schedule.Schedule;
@@ -14,6 +17,25 @@ public class ScheduleService {
 
     public ResponseEntity<?> save(Schedule schedule) {
         return ResponseEntity.ok().body(scheduleRepository.save(schedule));
+    }
+
+    public ResponseEntity<?> saveMany(Iterable<Schedule> schedules) {
+        return ResponseEntity.ok().body(scheduleRepository.saveAll(schedules));
+    }
+
+    public ResponseEntity<?> saveManyForDiscipline(Iterable<Schedule> schedules, String code) {
+        HashSet<Schedule> newSchedules = StreamSupport.stream(schedules.spliterator(), false)
+            .collect(Collectors.toCollection(HashSet::new));
+
+        HashSet<Schedule> currentSchedules = new HashSet<>(scheduleRepository.findByDisciplineCode(code));
+
+        currentSchedules.removeAll(newSchedules);
+
+        if (!currentSchedules.isEmpty()) {
+            scheduleRepository.deleteAll(currentSchedules);
+        }
+
+        return ResponseEntity.ok().body(scheduleRepository.saveAll(newSchedules));
     }
 
     public ResponseEntity<?> update(Schedule schedule) {

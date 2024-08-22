@@ -19,9 +19,19 @@ public class ScheduleController {
 
     private final ScheduleService scheduleService;
 
-    @PostMapping("/save")
+    @PostMapping("/save-one")
     public ResponseEntity<?> save(@RequestBody Schedule schedule) {
         return scheduleService.save(schedule);
+    }
+
+    @PostMapping("/save-many")
+    public ResponseEntity<?> save(@RequestBody Iterable<Schedule> schedules) {
+        return scheduleService.saveMany(schedules);
+    }
+
+    @PostMapping("/save-many/discipline/{code}")
+    public ResponseEntity<?> save(@RequestBody Iterable<Schedule> schedules, @PathVariable("code") String code) {
+        return scheduleService.saveManyForDiscipline(schedules, code);
     }
 
     @PutMapping("/update")
