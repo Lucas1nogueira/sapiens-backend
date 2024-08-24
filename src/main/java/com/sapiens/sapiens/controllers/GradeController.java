@@ -26,7 +26,7 @@ public class GradeController {
 
     @PostMapping("/save-many")
     public ResponseEntity<?> save(@RequestBody Iterable<Grade> grades) {
-        return gradeService.save(grades);
+        return gradeService.saveMany(grades);
     }
 
     @PutMapping("/update")

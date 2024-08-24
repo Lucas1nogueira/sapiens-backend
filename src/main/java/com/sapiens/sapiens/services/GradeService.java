@@ -17,7 +17,7 @@ public class GradeService {
         return ResponseEntity.ok().body(gradeRepository.save(grade));
     }
 
-    public ResponseEntity<?> save(Iterable<Grade> grades) {
+    public ResponseEntity<?> saveMany(Iterable<Grade> grades) {
         return ResponseEntity.ok().body(gradeRepository.saveAll(grades));
     }
 
