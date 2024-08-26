@@ -20,7 +20,7 @@ public class AttendanceController {
     
     private final AttendanceService attendanceService;
 
-    @PostMapping("/save")
+    @PostMapping("/save-one")
     public ResponseEntity<?> save(@RequestBody Attendance attendance) {
         return attendanceService.save(attendance);
     }

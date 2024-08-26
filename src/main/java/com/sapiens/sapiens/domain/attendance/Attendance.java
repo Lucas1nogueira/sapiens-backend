@@ -24,10 +24,10 @@ public class Attendance {
     private Long id;
     private String date;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     private Student student;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     private Lesson lesson;
     
     private boolean isPresent;
