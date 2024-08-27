@@ -4,6 +4,7 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.sapiens.sapiens.domain.attendance.Attendance;
 import com.sapiens.sapiens.domain.discipline.Discipline;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -34,7 +35,7 @@ public class Lesson {
     private Discipline discipline;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "lesson")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "lesson", cascade = CascadeType.REMOVE)
     private List<Attendance> attendances;
 
 }

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.sapiens.sapiens.domain.discipline.Discipline;
 import com.sapiens.sapiens.domain.grade.Grade;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -35,7 +36,7 @@ public class Evaluation {
     private Discipline discipline;
     
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "evaluation")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "evaluation", cascade = CascadeType.REMOVE)
     private List<Grade> grades;
 
 }

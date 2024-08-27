@@ -31,6 +31,11 @@ public class EvaluationService {
         return ResponseEntity.ok().body(evaluation);
     }
 
+    public ResponseEntity<?> delete(Long id) {
+        evaluationRepository.deleteById(id);
+        return ResponseEntity.ok().body("Avaliação excluída com sucesso.");
+    }
+
     public ResponseEntity<?> findAll() {
         return ResponseEntity.ok().body(evaluationRepository.findAll());
     }

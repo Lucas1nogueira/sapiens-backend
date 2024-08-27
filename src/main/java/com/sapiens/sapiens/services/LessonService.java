@@ -21,6 +21,11 @@ public class LessonService {
         return ResponseEntity.ok().body(lessonRepository.save(lesson));
     }
 
+    public ResponseEntity<?> delete(Long id) {
+        lessonRepository.deleteById(id);
+        return ResponseEntity.ok().body("Aula excluída com sucesso.");
+    }
+
     public ResponseEntity<?> findById(Long id) {
         Lesson lesson = lessonRepository.getReferenceById(id);
 

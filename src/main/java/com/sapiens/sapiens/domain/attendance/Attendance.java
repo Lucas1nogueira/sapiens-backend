@@ -22,7 +22,6 @@ public class Attendance {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String date;
 
     @ManyToOne(fetch = FetchType.EAGER)
     private Student student;

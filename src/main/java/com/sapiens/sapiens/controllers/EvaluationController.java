@@ -6,6 +6,7 @@ import com.sapiens.sapiens.domain.evaluation.Evaluation;
 import com.sapiens.sapiens.services.EvaluationService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,6 +28,11 @@ public class EvaluationController {
     @PutMapping("/update")
     public ResponseEntity<?> update(@RequestBody Evaluation evaluation) {
         return evaluationService.update(evaluation);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<?> delete(@PathVariable("id") Long id) {
+        return evaluationService.delete(id);
     }
 
     @GetMapping("/{id}")
