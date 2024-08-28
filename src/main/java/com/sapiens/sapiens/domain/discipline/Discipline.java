@@ -7,6 +7,8 @@ import com.sapiens.sapiens.domain.lesson.Lesson;
 import com.sapiens.sapiens.domain.schedule.Schedule;
 import com.sapiens.sapiens.domain.schoolClass.SchoolClass;
 import com.sapiens.sapiens.domain.teacher.Teacher;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
@@ -28,6 +30,12 @@ public class Discipline {
     private String code;
     private String name;
 
+    @Column(name = "many_lessons", nullable = true)
+    private Integer manyLessons;
+
+    @Column(name = "many_hours", nullable = true)
+    private Double manyHours;
+
     @ManyToOne(fetch = FetchType.EAGER)
     private Teacher teacher;
 
@@ -35,15 +43,15 @@ public class Discipline {
     private SchoolClass schoolClass;
         
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "discipline")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "discipline", cascade = CascadeType.REMOVE)
     private List<Evaluation> evaluations;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "discipline")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "discipline", cascade = CascadeType.REMOVE)
     private List<Schedule> schedules;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "discipline")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "discipline", cascade = CascadeType.REMOVE)
     private List<Lesson> lessons;
 
 }

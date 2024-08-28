@@ -6,6 +6,7 @@ import com.sapiens.sapiens.domain.discipline.Discipline;
 import com.sapiens.sapiens.services.DisciplineService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,9 +30,9 @@ public class DisciplineController {
         return disciplineService.update(discipline);
     }
 
-    @PutMapping("/delete")
-    public ResponseEntity<?> delete(@RequestBody Discipline discipline) {
-        return disciplineService.delete(discipline);
+    @DeleteMapping("/delete/{code}")
+    public ResponseEntity<?> delete(@PathVariable("code") String code) {
+        return disciplineService.delete(code);
     }
 
     @GetMapping("/code/{code}")
@@ -57,6 +58,11 @@ public class DisciplineController {
     @GetMapping("/class/{code}")
     public ResponseEntity<?> findBySchoolClassCode(@PathVariable("code") String code) {
         return disciplineService.findBySchoolClassCode(code);
+    }
+
+    @GetMapping("/progress/{code}")
+    public ResponseEntity<?> disciplineProgress(@PathVariable("code") String code) {
+        return disciplineService.disciplineProgress(code);
     }
 
 }
