@@ -20,10 +20,6 @@ public class AttendanceService {
         return ResponseEntity.ok().body(attendanceRepository.saveAll(attendances));
     }
 
-    public ResponseEntity<?> update(Attendance attendance) {
-        return ResponseEntity.ok().body(attendanceRepository.save(attendance));
-    }
-
     public ResponseEntity<?> delete(Attendance attendance) {
         attendanceRepository.delete(attendance);
         return ResponseEntity.ok().body("Aula excluída com sucesso.");

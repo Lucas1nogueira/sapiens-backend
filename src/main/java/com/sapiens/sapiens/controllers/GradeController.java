@@ -9,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
@@ -27,11 +26,6 @@ public class GradeController {
     @PostMapping("/save-many")
     public ResponseEntity<?> save(@RequestBody Iterable<Grade> grades) {
         return gradeService.saveMany(grades);
-    }
-
-    @PutMapping("/update")
-    public ResponseEntity<?> update(@RequestBody Grade grade) {
-        return gradeService.update(grade);
     }
 
     @GetMapping("/{id}")

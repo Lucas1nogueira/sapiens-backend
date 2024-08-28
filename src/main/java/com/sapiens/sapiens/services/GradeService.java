@@ -21,10 +21,6 @@ public class GradeService {
         return ResponseEntity.ok().body(gradeRepository.saveAll(grades));
     }
 
-    public ResponseEntity<?> update(Grade grade) {
-        return ResponseEntity.ok().body(gradeRepository.save(grade));
-    }
-
     public ResponseEntity<?> findById(Long id) {
         Grade grade = gradeRepository.getReferenceById(id);
 
