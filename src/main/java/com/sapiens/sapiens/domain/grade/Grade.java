@@ -19,8 +19,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Table(name = "tb_grades")
 public class Grade {
-    
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private Double value;

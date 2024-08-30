@@ -22,7 +22,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler(BusinessException.class)
-    public ResponseEntity<String> handleBusinessException(BusinessException exception) {    
+    public ResponseEntity<String> handleBusinessException(BusinessException exception) {
         return ResponseEntity.badRequest().body(exception.getMessage());
     }
 }

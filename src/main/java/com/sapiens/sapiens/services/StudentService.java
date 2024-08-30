@@ -11,14 +11,14 @@ import lombok.AllArgsConstructor;
 @Service
 @AllArgsConstructor
 public class StudentService {
-    
+
     private final StudentRepository studentRepository;
 
     public ResponseEntity<?> save(Student student) {
         if (studentRepository.existsByEmail(student.getEmail())) {
             throw new BusinessException("E-mail já registrado.");
         }
-        
+
         String encryptedPassword = new BCryptPasswordEncoder().encode(student.getPassword());
 
         student.setPassword(encryptedPassword);
@@ -30,18 +30,18 @@ public class StudentService {
     public ResponseEntity<?> update(Student student) {
         return ResponseEntity.ok().body(studentRepository.save(student));
     }
-    
+
     public ResponseEntity<?> findByMatriculation(String matriculation) {
         Student student = studentRepository.findByMatriculation(matriculation)
-            .orElseThrow(() -> new BusinessException("Estudante não encontrado."));
-        
+                .orElseThrow(() -> new BusinessException("Estudante não encontrado."));
+
         return ResponseEntity.ok().body(student);
     }
 
     public ResponseEntity<?> findByEmail(String email) {
         Student student = studentRepository.findByEmail(email)
-            .orElseThrow(() -> new BusinessException("Estudante não encontrado."));
-        
+                .orElseThrow(() -> new BusinessException("Estudante não encontrado."));
+
         return ResponseEntity.ok().body(student);
     }
 

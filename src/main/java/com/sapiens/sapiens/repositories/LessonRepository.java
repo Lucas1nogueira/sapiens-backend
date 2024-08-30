@@ -7,11 +7,11 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface LessonRepository extends JpaRepository<Lesson, Long> {
-    
+
     boolean existsById(Long id);
 
     List<Lesson> findByDisciplineCode(String code);
-    
+
     List<Lesson> findByAttendancesId(Long id);
-    
+
 }

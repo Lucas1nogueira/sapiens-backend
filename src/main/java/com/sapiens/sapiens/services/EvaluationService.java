@@ -12,7 +12,7 @@ import lombok.AllArgsConstructor;
 public class EvaluationService {
 
     private final EvaluationRepository evaluationRepository;
-  
+
     public ResponseEntity<?> save(Evaluation evaluation) {
         return ResponseEntity.ok().body(evaluationRepository.save(evaluation));
     }
@@ -47,5 +47,5 @@ public class EvaluationService {
     public ResponseEntity<?> findByGradeId(Long id) {
         return ResponseEntity.ok().body(evaluationRepository.findByGradesId(id));
     }
-    
+
 }

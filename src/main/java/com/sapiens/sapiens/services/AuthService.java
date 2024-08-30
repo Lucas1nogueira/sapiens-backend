@@ -27,7 +27,7 @@ public class AuthService implements UserDetailsService {
         var token = tokenService.generateToken(user.email());
 
         var response = new LoginResponse(
-            userDB.getId(), user.email(), user.email(), token, userDB.getRole(), userDB.isFirstLogin());
+                userDB.getId(), user.email(), user.email(), token, userDB.getRole(), userDB.isFirstLogin());
 
         return ResponseEntity.ok().body(response);
     }
@@ -44,16 +44,15 @@ public class AuthService implements UserDetailsService {
     }
 
     // public ResponseEntity<?> refreshToken() {
-    //     return ResponseEntity.ok().body(tokenService.refreshToken());
+    // return ResponseEntity.ok().body(tokenService.refreshToken());
     // }
 
     public ResponseEntity<?> changePassword(ChangePasswordRequest user) {
         var userDB = authRepository.findUserByEmail(user.email())
                 .orElseThrow(() -> new AuthException("Usuário não encontrado."));
-        
-        
+
         var encrypt = new BCryptPasswordEncoder();
-        
+
         if (!userDB.isFirstLogin()) {
             if (!encrypt.matches(user.password(), userDB.getPassword())) {
                 throw new AuthException("A sua senha antiga está incorreta.");
@@ -61,7 +60,7 @@ public class AuthService implements UserDetailsService {
         }
 
         if (!userDB.isFirstLogin() && user.password().equals(user.newPassword())) {
-          throw new AuthException("A nova senha deve ser diferente da antiga.");
+            throw new AuthException("A nova senha deve ser diferente da antiga.");
         }
 
         var encryptedNewPassword = encrypt.encode(user.newPassword());

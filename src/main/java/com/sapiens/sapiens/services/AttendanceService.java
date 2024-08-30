@@ -9,7 +9,7 @@ import lombok.AllArgsConstructor;
 @Service
 @AllArgsConstructor
 public class AttendanceService {
-    
+
     private final AttendanceRepository attendanceRepository;
 
     public ResponseEntity<?> save(Attendance attendance) {

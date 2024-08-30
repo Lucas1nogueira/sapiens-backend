@@ -11,7 +11,7 @@ import lombok.AllArgsConstructor;
 @Service
 @AllArgsConstructor
 public class DisciplineService {
-    
+
     private final DisciplineRepository disciplineRepository;
 
     public ResponseEntity<?> save(Discipline discipline) {
@@ -35,15 +35,15 @@ public class DisciplineService {
 
     public ResponseEntity<?> findByName(String name) {
         Discipline discipline = disciplineRepository.findByName(name)
-            .orElseThrow(() -> new BusinessException("Disciplina não encontrada."));
-        
+                .orElseThrow(() -> new BusinessException("Disciplina não encontrada."));
+
         return ResponseEntity.ok().body(discipline);
     }
 
     public ResponseEntity<?> findByCode(String code) {
         Discipline discipline = disciplineRepository.findByCode(code)
-            .orElseThrow(() -> new BusinessException("Disciplina não encontrada."));
-        
+                .orElseThrow(() -> new BusinessException("Disciplina não encontrada."));
+
         return ResponseEntity.ok().body(discipline);
     }
 
@@ -69,17 +69,18 @@ public class DisciplineService {
 
     public ResponseEntity<?> disciplineProgress(String code) {
         Discipline discipline = disciplineRepository.getReferenceById(code);
-        var lessonsCompleted = totalLessons(discipline); 
+        var lessonsCompleted = totalLessons(discipline);
 
         var totalLessons = discipline.getManyLessons();
-        if (totalLessons == 0) return ResponseEntity.ok().body(0);
+        if (totalLessons == 0)
+            return ResponseEntity.ok().body(0);
 
         var progress = ((double) lessonsCompleted / totalLessons) * 100;
         var formattedProgress = String.format("%.2f", progress);
         var students = discipline.getSchoolClass().getStudents().size();
 
         return ResponseEntity.ok().body(
-            new DisciplineProgress(totalLessons, lessonsCompleted, formattedProgress, students));
+                new DisciplineProgress(totalLessons, lessonsCompleted, formattedProgress, students));
     }
 
 }

@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 @AllArgsConstructor
 @RequestMapping("/api/lesson")
 public class LessonController {
-    
+
     private final LessonService lessonService;
 
     @PostMapping("/save")
@@ -54,5 +54,5 @@ public class LessonController {
     public ResponseEntity<?> findByAttendanceId(@PathVariable("id") Long id) {
         return lessonService.findByAttendanceId(id);
     }
-    
+
 }

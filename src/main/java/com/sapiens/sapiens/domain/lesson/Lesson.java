@@ -23,8 +23,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Table(name = "tb_lessons")
 public class Lesson {
-    
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String description;
     private String date;

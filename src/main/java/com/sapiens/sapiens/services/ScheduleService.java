@@ -12,7 +12,7 @@ import lombok.AllArgsConstructor;
 @Service
 @AllArgsConstructor
 public class ScheduleService {
-    
+
     private final ScheduleRepository scheduleRepository;
 
     public ResponseEntity<?> save(Schedule schedule) {
@@ -25,7 +25,7 @@ public class ScheduleService {
 
     public ResponseEntity<?> saveManyForDiscipline(Iterable<Schedule> schedules, String code) {
         HashSet<Schedule> newSchedules = StreamSupport.stream(schedules.spliterator(), false)
-            .collect(Collectors.toCollection(HashSet::new));
+                .collect(Collectors.toCollection(HashSet::new));
 
         HashSet<Schedule> currentSchedules = new HashSet<>(scheduleRepository.findByDisciplineCode(code));
 

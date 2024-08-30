@@ -32,7 +32,7 @@ public class LessonService {
         if (lesson == null) {
             throw new BusinessException("Aula não encontrada.");
         }
-        
+
         return ResponseEntity.ok().body(lesson);
     }
 
@@ -43,7 +43,7 @@ public class LessonService {
     public ResponseEntity<?> findByDisciplineCode(String code) {
         return ResponseEntity.ok().body(lessonRepository.findByDisciplineCode(code));
     }
-    
+
     public ResponseEntity<?> findByAttendanceId(Long id) {
         return ResponseEntity.ok().body(lessonRepository.findByAttendancesId(id));
     }

@@ -12,7 +12,7 @@ import lombok.AllArgsConstructor;
 public class GradeService {
 
     private final GradeRepository gradeRepository;
-  
+
     public ResponseEntity<?> save(Grade grade) {
         return ResponseEntity.ok().body(gradeRepository.save(grade));
     }
@@ -27,7 +27,7 @@ public class GradeService {
         if (grade == null) {
             throw new BusinessException("Nota não encontrada.");
         }
-        
+
         return ResponseEntity.ok().body(grade);
     }
 
@@ -38,7 +38,7 @@ public class GradeService {
     public ResponseEntity<?> findByStudentId(Long id) {
         return ResponseEntity.ok().body(gradeRepository.findByStudentId(id));
     }
-    
+
     public ResponseEntity<?> findByEvaluationId(Long id) {
         return ResponseEntity.ok().body(gradeRepository.findByEvaluationId(id));
     }

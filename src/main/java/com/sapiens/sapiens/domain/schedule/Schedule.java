@@ -20,8 +20,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Table(name = "tb_schedules")
 public class Schedule {
-    
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String day;
