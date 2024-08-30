@@ -20,7 +20,8 @@ import lombok.NoArgsConstructor;
 @Table(name = "tb_attendances")
 public class Attendance {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne(fetch = FetchType.EAGER)
@@ -28,8 +29,8 @@ public class Attendance {
 
     @ManyToOne(fetch = FetchType.EAGER)
     private Lesson lesson;
-    
+
     private boolean isPresent;
     private int attendedCount;
-    
+
 }

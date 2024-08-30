@@ -7,7 +7,7 @@ import java.util.List;
 
 @Repository
 public interface EvaluationRepository extends JpaRepository<Evaluation, Long> {
-    
+
     boolean existsById(Long id);
 
     List<Evaluation> findByDisciplineCode(String code);

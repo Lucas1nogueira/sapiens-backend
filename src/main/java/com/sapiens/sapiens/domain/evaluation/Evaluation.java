@@ -24,8 +24,9 @@ import java.util.List;
 @AllArgsConstructor
 @Table(name = "tb_evaluations")
 public class Evaluation {
-    
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private String createdAt;
@@ -34,7 +35,7 @@ public class Evaluation {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @ManyToOne(fetch = FetchType.EAGER)
     private Discipline discipline;
-    
+
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "evaluation", cascade = CascadeType.REMOVE)
     private List<Grade> grades;

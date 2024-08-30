@@ -25,8 +25,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Table(name = "tb_disciplines")
 public class Discipline {
-    
-    @Id 
+
+    @Id
     private String code;
     private String name;
 
@@ -41,7 +41,7 @@ public class Discipline {
 
     @ManyToOne(fetch = FetchType.EAGER)
     private SchoolClass schoolClass;
-        
+
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "discipline", cascade = CascadeType.REMOVE)
     private List<Evaluation> evaluations;

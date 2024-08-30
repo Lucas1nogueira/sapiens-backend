@@ -21,14 +21,14 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class Student extends User {
-    
+
     private String matriculation;
     private int age;
     private String sex;
 
     @ManyToOne(fetch = FetchType.EAGER)
     private SchoolClass schoolClass;
-    
+
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "student")
     private List<Grade> grades;

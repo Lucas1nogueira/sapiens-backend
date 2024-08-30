@@ -11,7 +11,7 @@ import lombok.AllArgsConstructor;
 @Service
 @AllArgsConstructor
 public class TeacherService {
-    
+
     private final TeacherRepository teacherRepository;
 
     public ResponseEntity<?> save(Teacher teacher) {
@@ -29,18 +29,18 @@ public class TeacherService {
     public ResponseEntity<?> update(Teacher teacher) {
         return ResponseEntity.ok().body(teacherRepository.save(teacher));
     }
-    
+
     public ResponseEntity<?> findByCode(String code) {
         Teacher teacher = teacherRepository.findByCode(code)
-            .orElseThrow(() -> new BusinessException("Professor não encontrado."));
-        
+                .orElseThrow(() -> new BusinessException("Professor não encontrado."));
+
         return ResponseEntity.ok().body(teacher);
     }
 
     public ResponseEntity<?> findByEmail(String email) {
         Teacher teacher = teacherRepository.findByEmail(email)
-            .orElseThrow(() -> new BusinessException("Professor não encontrado."));
-        
+                .orElseThrow(() -> new BusinessException("Professor não encontrado."));
+
         return ResponseEntity.ok().body(teacher);
     }
 

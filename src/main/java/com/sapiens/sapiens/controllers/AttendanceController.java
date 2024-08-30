@@ -16,7 +16,7 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 @RequestMapping("/api/attendance")
 public class AttendanceController {
-    
+
     private final AttendanceService attendanceService;
 
     @PostMapping("/save-one")
@@ -48,5 +48,5 @@ public class AttendanceController {
     public ResponseEntity<?> findByLessonId(@PathVariable("id") Long id) {
         return attendanceService.findByLessonId(id);
     }
-    
+
 }

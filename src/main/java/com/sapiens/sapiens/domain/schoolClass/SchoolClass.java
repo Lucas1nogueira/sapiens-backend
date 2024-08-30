@@ -20,10 +20,10 @@ import jakarta.persistence.Id;
 @NoArgsConstructor
 @Table(name = "tb_school_classes")
 public class SchoolClass {
-    
+
     @Id
     private String code;
-    
+
     @JsonProperty(access = Access.WRITE_ONLY)
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "schoolClass")
     private List<Student> students;
@@ -31,5 +31,5 @@ public class SchoolClass {
     @JsonProperty(access = Access.WRITE_ONLY)
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "schoolClass")
     private List<Discipline> disciplines;
-    
+
 }

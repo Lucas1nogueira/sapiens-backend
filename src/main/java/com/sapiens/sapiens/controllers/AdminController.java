@@ -11,9 +11,9 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 @RequestMapping("api/admin")
 public class AdminController {
-    
+
     private final AdminService adminService;
-    
+
     @GetMapping("/all")
     public ResponseEntity<?> findAll() {
         return adminService.findAll();

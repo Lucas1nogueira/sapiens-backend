@@ -15,11 +15,10 @@ public class DataInitializer {
         return args -> {
             if (authRepository.findByRole(UserRole.ADMIN).isEmpty()) {
                 var user = new User(
-                    "Admin",
-                    "admin@mail.com",
-                    encoder.encode("admin123"),
-                    UserRole.ADMIN
-                );
+                        "Admin",
+                        "admin@mail.com",
+                        encoder.encode("admin123"),
+                        UserRole.ADMIN);
                 user.setFirstLogin(false);
                 authRepository.save(user);
             }

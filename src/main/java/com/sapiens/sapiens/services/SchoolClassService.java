@@ -11,7 +11,7 @@ import lombok.AllArgsConstructor;
 @Service
 @AllArgsConstructor
 public class SchoolClassService {
-    
+
     private final SchoolClassRepository schoolClassRepository;
     private final StudentService studentService;
     private final DisciplineService disciplineService;
@@ -30,7 +30,7 @@ public class SchoolClassService {
 
         schoolClass.getStudents().forEach(student -> {
             var studentAlreadyAssigned = student.getSchoolClass() != null &&
-                !student.getSchoolClass().getCode().equals(schoolClassDb.getCode());
+                    !student.getSchoolClass().getCode().equals(schoolClassDb.getCode());
 
             if (studentAlreadyAssigned) {
                 throw new BusinessException("Aluno já se encontra em outra turma.");
@@ -42,12 +42,12 @@ public class SchoolClassService {
 
             if (shouldRemove) {
                 student.setSchoolClass(null);
-                studentService.update(student); 
+                studentService.update(student);
             }
-            
+
             return shouldRemove;
         });
-    
+
         schoolClass.getStudents().forEach(student -> {
             student.setSchoolClass(schoolClassDb);
             studentService.update(student);
@@ -62,7 +62,7 @@ public class SchoolClassService {
 
         schoolClass.getDisciplines().forEach(discipline -> {
             var disciplineAlreadyAssigned = discipline.getSchoolClass() != null &&
-                !discipline.getSchoolClass().getCode().equals(schoolClassDb.getCode());
+                    !discipline.getSchoolClass().getCode().equals(schoolClassDb.getCode());
 
             if (disciplineAlreadyAssigned) {
                 throw new BusinessException("Disciplina já se encontra em outra turma.");
@@ -74,12 +74,12 @@ public class SchoolClassService {
 
             if (shouldRemove) {
                 discipline.setSchoolClass(null);
-                disciplineService.update(discipline); 
+                disciplineService.update(discipline);
             }
-            
+
             return shouldRemove;
         });
-    
+
         schoolClass.getDisciplines().forEach(discipline -> {
             discipline.setSchoolClass(schoolClassDb);
             disciplineService.update(discipline);
@@ -87,11 +87,11 @@ public class SchoolClassService {
 
         return ResponseEntity.ok().body(schoolClassRepository.save(schoolClassDb));
     }
-    
+
     public ResponseEntity<?> findByCode(String code) {
         SchoolClass schoolClass = schoolClassRepository.findByCode(code)
-            .orElseThrow(() -> new BusinessException("Turma não encontrada."));
-        
+                .orElseThrow(() -> new BusinessException("Turma não encontrada."));
+
         return ResponseEntity.ok().body(schoolClass);
     }
 
@@ -101,14 +101,14 @@ public class SchoolClassService {
 
     public ResponseEntity<?> findByStudentId(Long id) {
         var schoolClass = schoolClassRepository.findByStudentsId(id)
-            .orElseThrow(() -> new BusinessException("Turma não encontrada."));
+                .orElseThrow(() -> new BusinessException("Turma não encontrada."));
 
         return ResponseEntity.ok().body(schoolClass);
     }
 
     public ResponseEntity<?> findStudentsByDisciplineCode(String code) {
         var schoolClass = schoolClassRepository.findByDisciplinesCode(code)
-            .orElseThrow(() -> new BusinessException("Turma não encontrada."));
+                .orElseThrow(() -> new BusinessException("Turma não encontrada."));
 
         return ResponseEntity.ok().body(schoolClass.getStudents());
     }
