@@ -5,7 +5,8 @@ public enum UserRole {
     TEACHER("TEACHER"),
     STUDENT("STUDENT"),
     CORDINATOR("CORDINATOR"),
-    GUARDIAN("GUARDIAN");
+    GUARDIAN("GUARDIAN"),
+    SUPERADMIN("SUPERADMIN");
 
     private final String role;
 
