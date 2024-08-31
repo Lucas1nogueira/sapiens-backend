@@ -48,4 +48,8 @@ public class TeacherService {
         return ResponseEntity.ok().body(teacherRepository.findAll());
     }
 
+    public ResponseEntity<?> findBySchoolId(Long id) {
+        return ResponseEntity.ok().body(teacherRepository.findBySchoolId(id));
+    }
+
 }

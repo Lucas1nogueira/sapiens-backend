@@ -52,4 +52,9 @@ public class StudentService {
     public ResponseEntity<?> findBySchoolClassCode(String code) {
         return ResponseEntity.ok().body(studentRepository.findBySchoolClassCode(code));
     }
+
+    public ResponseEntity<?> findBySchoolId(Long id) {
+        return ResponseEntity.ok().body(studentRepository.findBySchoolId(id));
+    }
+
 }

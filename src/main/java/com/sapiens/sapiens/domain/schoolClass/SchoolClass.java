@@ -3,6 +3,7 @@ package com.sapiens.sapiens.domain.schoolClass;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 import com.sapiens.sapiens.domain.discipline.Discipline;
+import com.sapiens.sapiens.domain.school.School;
 import com.sapiens.sapiens.domain.student.Student;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -13,6 +14,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import java.util.List;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 @Data
@@ -31,5 +33,8 @@ public class SchoolClass {
     @JsonProperty(access = Access.WRITE_ONLY)
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "schoolClass")
     private List<Discipline> disciplines;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    private School school;
 
 }

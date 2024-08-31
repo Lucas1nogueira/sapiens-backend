@@ -46,4 +46,20 @@ public class SchoolService {
         return ResponseEntity.ok().body(schoolRepository.findBySecretariatId(id));
     }
 
+    public ResponseEntity<?> findByStudentsId(Long id) {
+        return ResponseEntity.ok().body(schoolRepository.findByStudentsId(id));
+    }
+
+    public ResponseEntity<?> findByTeachersId(Long id) {
+        return ResponseEntity.ok().body(schoolRepository.findByTeachersId(id));
+    }
+
+    public ResponseEntity<?> findByDisciplinesCode(String code) {
+        return ResponseEntity.ok().body(schoolRepository.findByDisciplinesCode(code));
+    }
+
+    public ResponseEntity<?> findBySchoolClassesCode(String code) {
+        return ResponseEntity.ok().body(schoolRepository.findBySchoolClassesCode(code));
+    }
+
 }

@@ -65,4 +65,9 @@ public class DisciplineController {
         return disciplineService.disciplineProgress(code);
     }
 
+    @GetMapping("/school/{id}")
+    public ResponseEntity<?> findBySchoolId(@PathVariable("id") Long id) {
+        return disciplineService.findBySchoolId(id);
+    }
+
 }

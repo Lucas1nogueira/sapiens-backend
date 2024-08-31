@@ -16,4 +16,7 @@ public interface DisciplineRepository extends JpaRepository<Discipline, String> 
     List<Discipline> findByTeacherId(Long id);
 
     List<Discipline> findBySchoolClassCode(String code);
+
+    List<Discipline> findBySchoolId(Long id);
+
 }

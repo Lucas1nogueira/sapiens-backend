@@ -83,4 +83,8 @@ public class DisciplineService {
                 new DisciplineProgress(totalLessons, lessonsCompleted, formattedProgress, students));
     }
 
+    public ResponseEntity<?> findBySchoolId(Long id) {
+        return ResponseEntity.ok().body(disciplineRepository.findBySchoolId(id));
+    }
+
 }

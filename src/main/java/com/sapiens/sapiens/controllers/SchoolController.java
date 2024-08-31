@@ -39,4 +39,24 @@ public class SchoolController {
         return schoolService.findBySecretariatId(id);
     }
 
+    @GetMapping("/students/{id}")
+    public ResponseEntity<?> findByStudentsId(@PathVariable("id") Long id) {
+        return schoolService.findByStudentsId(id);
+    }
+
+    @GetMapping("/teachers/{id}")
+    public ResponseEntity<?> findByTeachersId(@PathVariable("id") Long id) {
+        return schoolService.findByTeachersId(id);
+    }
+
+    @GetMapping("/disciplines/{code}")
+    public ResponseEntity<?> findByDisciplinesCode(@PathVariable("code") String code) {
+        return schoolService.findByDisciplinesCode(code);
+    }
+
+    @GetMapping("/classes/{code}")
+    public ResponseEntity<?> findBySchoolClassesCode(@PathVariable("code") String code) {
+        return schoolService.findBySchoolClassesCode(code);
+    }
+
 }

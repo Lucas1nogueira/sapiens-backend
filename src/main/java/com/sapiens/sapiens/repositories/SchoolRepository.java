@@ -13,4 +13,12 @@ public interface SchoolRepository extends JpaRepository<School, Long> {
 
     List<School> findBySecretariatId(Long id);
 
+    List<School> findByStudentsId(Long id);
+
+    List<School> findByTeachersId(Long id);
+
+    List<School> findByDisciplinesCode(String code);
+
+    List<School> findBySchoolClassesCode(String code);
+
 }

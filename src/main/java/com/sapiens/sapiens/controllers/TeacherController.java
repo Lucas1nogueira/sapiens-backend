@@ -44,4 +44,9 @@ public class TeacherController {
         return teacherService.findAll();
     }
 
+    @GetMapping("/school/{id}")
+    public ResponseEntity<?> findBySchoolId(@PathVariable("id") Long id) {
+        return teacherService.findBySchoolId(id);
+    }
+
 }

@@ -113,4 +113,8 @@ public class SchoolClassService {
         return ResponseEntity.ok().body(schoolClass.getStudents());
     }
 
+    public ResponseEntity<?> findBySchoolId(Long id) {
+        return ResponseEntity.ok().body(schoolClassRepository.findBySchoolId(id));
+    }
+
 }

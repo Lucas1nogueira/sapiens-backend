@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.sapiens.sapiens.domain.evaluation.Evaluation;
 import com.sapiens.sapiens.domain.lesson.Lesson;
 import com.sapiens.sapiens.domain.schedule.Schedule;
+import com.sapiens.sapiens.domain.school.School;
 import com.sapiens.sapiens.domain.schoolClass.SchoolClass;
 import com.sapiens.sapiens.domain.teacher.Teacher;
 import jakarta.persistence.CascadeType;
@@ -53,5 +54,8 @@ public class Discipline {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "discipline", cascade = CascadeType.REMOVE)
     private List<Lesson> lessons;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    private School school;
 
 }
