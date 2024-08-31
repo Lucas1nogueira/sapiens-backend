@@ -22,4 +22,5 @@ public class AdminService {
     public ResponseEntity<?> update(Admin admin) {
         return ResponseEntity.ok().body(adminRepository.save(admin));
     }
+
 }

@@ -36,4 +36,5 @@ public class SecretariatService {
     public ResponseEntity<?> findBySchoolsId(Long id) {
         return ResponseEntity.ok().body(secretariatRepository.findBySchoolsId(id));
     }
+
 }

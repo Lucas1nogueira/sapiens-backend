@@ -26,4 +26,5 @@ public class SuperAdminController {
     public ResponseEntity<?> update(@RequestBody SuperAdmin superAdmin) {
         return superAdminService.update(superAdmin);
     }
+
 }

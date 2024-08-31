@@ -21,4 +21,5 @@ public class SuperAdminService {
     public ResponseEntity<?> update(SuperAdmin superAdmin) {
         return ResponseEntity.ok().body(superAdminRepository.save(superAdmin));
     }
+
 }

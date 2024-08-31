@@ -27,4 +27,5 @@ public class AdminController {
     public ResponseEntity<?> update(@RequestBody Admin admin) {
         return adminService.update(admin);
     }
+
 }

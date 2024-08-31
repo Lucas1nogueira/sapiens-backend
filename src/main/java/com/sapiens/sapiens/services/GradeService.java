@@ -42,4 +42,5 @@ public class GradeService {
     public ResponseEntity<?> findByEvaluationId(Long id) {
         return ResponseEntity.ok().body(gradeRepository.findByEvaluationId(id));
     }
+
 }

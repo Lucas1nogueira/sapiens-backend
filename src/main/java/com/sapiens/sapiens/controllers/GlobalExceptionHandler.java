@@ -25,4 +25,5 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     public ResponseEntity<String> handleBusinessException(BusinessException exception) {
         return ResponseEntity.badRequest().body(exception.getMessage());
     }
+
 }
