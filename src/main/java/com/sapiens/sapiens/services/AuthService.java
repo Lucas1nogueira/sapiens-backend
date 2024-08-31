@@ -1,6 +1,8 @@
 package com.sapiens.sapiens.services;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -22,7 +24,15 @@ public class AuthService implements UserDetailsService {
     private final AuthRepository authRepository;
     private final TokenService tokenService;
 
-    public ResponseEntity<?> login(LoginRequest user) {
+    public ResponseEntity<?> login(LoginRequest user, AuthenticationManager authManager) {
+        var usernamePassword = new UsernamePasswordAuthenticationToken(user.email(), user.password());
+
+        try {
+            authManager.authenticate(usernamePassword);
+        } catch (Exception exception) {
+            throw new AuthException("Usuário ou senha inválidos.");
+        }
+
         var userDB = (User) authRepository.findByEmail(user.email());
         var token = tokenService.generateToken(user.email());
 

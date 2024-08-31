@@ -5,12 +5,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.sapiens.sapiens.domain.user.ChangePasswordRequest;
 import com.sapiens.sapiens.domain.user.LoginRequest;
 import com.sapiens.sapiens.domain.user.RegisterRequest;
-import com.sapiens.sapiens.infra.exceptions.AuthException;
 import com.sapiens.sapiens.services.AuthService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -24,15 +22,7 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest user) {
-        var usernamePassword = new UsernamePasswordAuthenticationToken(user.email(), user.password());
-
-        try {
-            authenticationManager.authenticate(usernamePassword);
-        } catch (Exception exception) {
-            throw new AuthException("Usuário ou senha inválidos.");
-        }
-
-        return authService.login(user);
+        return authService.login(user, authenticationManager);
     }
 
     @PostMapping("/register")
