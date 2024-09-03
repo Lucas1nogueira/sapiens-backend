@@ -34,6 +34,11 @@ public class SchoolController {
         return schoolService.findAll();
     }
 
+    @GetMapping("/admin/{id}")
+    public ResponseEntity<?> findByAdminId(@PathVariable("id") Long id) {
+        return schoolService.findByAdminId(id);
+    }
+
     @GetMapping("/secretariat/{id}")
     public ResponseEntity<?> findBySecretariatId(@PathVariable("id") Long id) {
         return schoolService.findBySecretariatId(id);

@@ -2,6 +2,8 @@ package com.sapiens.sapiens.domain.superadmin;
 
 import com.sapiens.sapiens.domain.secretariat.Secretariat;
 import com.sapiens.sapiens.domain.user.User;
+import com.sapiens.sapiens.domain.user.UserRole;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.OneToOne;
@@ -21,5 +23,9 @@ public class SuperAdmin extends User {
 
     @OneToOne(fetch = FetchType.EAGER)
     private Secretariat secretariat;
+
+    public SuperAdmin(String name, String email, String password, UserRole role) {
+        super(name, email, password, role);
+    }
 
 }

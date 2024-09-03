@@ -37,4 +37,11 @@ public class SecretariatService {
         return ResponseEntity.ok().body(secretariatRepository.findBySchoolsId(id));
     }
 
+    public ResponseEntity<?> findBySuperAdminId(Long id) {
+        var secretariat = secretariatRepository.findBySuperAdminId(id)
+                .orElseThrow(() -> new BusinessException("Secretaria não encontrada."));
+
+        return ResponseEntity.ok().body(secretariat);
+    }
+
 }

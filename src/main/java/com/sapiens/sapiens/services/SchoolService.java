@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 import com.sapiens.sapiens.infra.exceptions.BusinessException;
 import com.sapiens.sapiens.repositories.SchoolRepository;
 import com.sapiens.sapiens.domain.school.School;
-import com.sapiens.sapiens.domain.user.RegisterRequest;
 import lombok.AllArgsConstructor;
 
 @Service
@@ -13,14 +12,8 @@ import lombok.AllArgsConstructor;
 public class SchoolService {
 
     private final SchoolRepository schoolRepository;
-    private final AuthService authService;
 
     public ResponseEntity<?> save(School school) {
-        var admin = school.getAdmin();
-
-        authService.register(
-                new RegisterRequest(admin.getName(), admin.getEmail(), admin.getPassword(), admin.getRole()));
-
         return ResponseEntity.ok().body(schoolRepository.save(school));
     }
 
@@ -40,6 +33,10 @@ public class SchoolService {
 
     public ResponseEntity<?> findAll() {
         return ResponseEntity.ok().body(schoolRepository.findAll());
+    }
+
+    public ResponseEntity<?> findByAdminId(Long id) {
+        return ResponseEntity.ok().body(schoolRepository.findByAdminId(id));
     }
 
     public ResponseEntity<?> findBySecretariatId(Long id) {

@@ -12,4 +12,6 @@ public interface SecretariatRepository extends JpaRepository<Secretariat, Long> 
 
     Optional<Secretariat> findBySchoolsId(Long id);
 
+    Optional<Secretariat> findBySuperAdminId(Long id);
+
 }

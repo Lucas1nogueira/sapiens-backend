@@ -23,6 +23,11 @@ public class AdminController {
         return adminService.findAll();
     }
 
+    @GetMapping("/admins")
+    public ResponseEntity<?> findAllAdmins() {
+        return adminService.findAllAdmins();
+    }
+
     @PutMapping("/update")
     public ResponseEntity<?> update(@RequestBody Admin admin) {
         return adminService.update(admin);

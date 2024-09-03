@@ -4,6 +4,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.sapiens.sapiens.domain.admin.Admin;
+import com.sapiens.sapiens.domain.user.UserRole;
 import com.sapiens.sapiens.repositories.AdminRepository;
 import com.sapiens.sapiens.repositories.AuthRepository;
 import lombok.AllArgsConstructor;
@@ -14,6 +15,10 @@ public class AdminService {
 
     private final AuthRepository authRepository;
     private final AdminRepository adminRepository;
+
+    public ResponseEntity<?> findAllAdmins() {
+        return ResponseEntity.ok().body(authRepository.findByRole(UserRole.ADMIN));
+    }
 
     public ResponseEntity<?> findAll() {
         return ResponseEntity.ok().body(authRepository.findAll());

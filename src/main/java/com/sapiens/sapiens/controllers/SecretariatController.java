@@ -44,4 +44,9 @@ public class SecretariatController {
         return secretariatService.findBySchoolsId(id);
     }
 
+    @GetMapping("/admin/{id}")
+    public ResponseEntity<?> findBySuperAdminId(@PathVariable("id") Long id) {
+        return secretariatService.findBySuperAdminId(id);
+    }
+
 }
