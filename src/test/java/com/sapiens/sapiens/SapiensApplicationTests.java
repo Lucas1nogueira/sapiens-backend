@@ -1,10 +1,10 @@
-package com.sapiens.sapiensSoftware;
+package com.sapiens.sapiens;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class SapiensSoftwareApplicationTests {
+class SapiensApplicationTests {
 
 	@Test
 	void contextLoads() {
