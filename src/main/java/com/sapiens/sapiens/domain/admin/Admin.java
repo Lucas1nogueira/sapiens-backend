@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(callSuper = true)
 public class Admin extends User {
 
-    @OneToOne(fetch = FetchType.EAGER, mappedBy = "admin")
+    @OneToOne(fetch = FetchType.EAGER)
     private School school;
 
 }

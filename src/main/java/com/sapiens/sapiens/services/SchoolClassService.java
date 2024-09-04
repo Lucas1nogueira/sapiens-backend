@@ -33,7 +33,7 @@ public class SchoolClassService {
                     !student.getSchoolClass().getCode().equals(schoolClassDb.getCode());
 
             if (studentAlreadyAssigned) {
-                throw new BusinessException("Aluno já se encontra em outra turma.");
+                throw new BusinessException("Aluno: " + student.getName() + " já se encontra em outra turma.");
             }
         });
 
@@ -65,7 +65,7 @@ public class SchoolClassService {
                     !discipline.getSchoolClass().getCode().equals(schoolClassDb.getCode());
 
             if (disciplineAlreadyAssigned) {
-                throw new BusinessException("Disciplina já se encontra em outra turma.");
+                throw new BusinessException("Disciplina: " + discipline.getCode() + " já se encontra em outra turma.");
             }
         });
 

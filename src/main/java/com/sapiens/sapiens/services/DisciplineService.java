@@ -24,6 +24,8 @@ public class DisciplineService {
         disciplineDb.setName(discipline.getName());
         disciplineDb.setManyLessons(discipline.getManyLessons());
         disciplineDb.setManyHours(discipline.getManyHours());
+        disciplineDb.setTeacher(discipline.getTeacher());
+        disciplineDb.setSchoolClass(discipline.getSchoolClass());
 
         return ResponseEntity.ok().body(disciplineRepository.save(disciplineDb));
     }
@@ -77,7 +79,11 @@ public class DisciplineService {
 
         var progress = ((double) lessonsCompleted / totalLessons) * 100;
         var formattedProgress = String.format("%.2f", progress);
-        var students = discipline.getSchoolClass().getStudents().size();
+
+        var students = 0;
+        if (discipline.getSchoolClass() != null) {
+            students = discipline.getSchoolClass().getStudents().size();
+        }
 
         return ResponseEntity.ok().body(
                 new DisciplineProgress(totalLessons, lessonsCompleted, formattedProgress, students));

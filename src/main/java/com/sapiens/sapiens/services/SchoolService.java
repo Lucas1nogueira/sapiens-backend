@@ -36,27 +36,45 @@ public class SchoolService {
     }
 
     public ResponseEntity<?> findByAdminId(Long id) {
-        return ResponseEntity.ok().body(schoolRepository.findByAdminId(id));
+        var school = schoolRepository.findByAdminId(id)
+                .orElseThrow(() -> new BusinessException("Escola não encontrada."));
+
+        return ResponseEntity.ok().body(school);
     }
 
     public ResponseEntity<?> findBySecretariatId(Long id) {
-        return ResponseEntity.ok().body(schoolRepository.findBySecretariatId(id));
+        var school = schoolRepository.findBySecretariatId(id)
+                .orElseThrow(() -> new BusinessException("Escola não encontrada."));
+
+        return ResponseEntity.ok().body(school);
     }
 
     public ResponseEntity<?> findByStudentsId(Long id) {
-        return ResponseEntity.ok().body(schoolRepository.findByStudentsId(id));
+        var school = schoolRepository.findByStudentsId(id)
+                .orElseThrow(() -> new BusinessException("Escola não encontrada."));
+
+        return ResponseEntity.ok().body(school);
     }
 
     public ResponseEntity<?> findByTeachersId(Long id) {
-        return ResponseEntity.ok().body(schoolRepository.findByTeachersId(id));
+        var school = schoolRepository.findByTeachersId(id)
+                .orElseThrow(() -> new BusinessException("Escola não encontrada."));
+
+        return ResponseEntity.ok().body(school);
     }
 
     public ResponseEntity<?> findByDisciplinesCode(String code) {
-        return ResponseEntity.ok().body(schoolRepository.findByDisciplinesCode(code));
+        var school = schoolRepository.findByDisciplinesCode(code)
+                .orElseThrow(() -> new BusinessException("Escola não encontrada."));
+
+        return ResponseEntity.ok().body(school);
     }
 
     public ResponseEntity<?> findBySchoolClassesCode(String code) {
-        return ResponseEntity.ok().body(schoolRepository.findBySchoolClassesCode(code));
+        var school = schoolRepository.findBySchoolClassesCode(code)
+                .orElseThrow(() -> new BusinessException("Escola não encontrada."));
+
+        return ResponseEntity.ok().body(school);
     }
 
 }

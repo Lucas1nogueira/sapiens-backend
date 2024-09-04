@@ -2,6 +2,7 @@ package com.sapiens.sapiens.controllers;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +18,11 @@ import lombok.AllArgsConstructor;
 public class AdminController {
 
     private final AdminService adminService;
+
+    @PostMapping("/save")
+    public ResponseEntity<?> save(@RequestBody Admin admin) {
+        return adminService.save(admin);
+    }
 
     @GetMapping("/all")
     public ResponseEntity<?> findAll() {

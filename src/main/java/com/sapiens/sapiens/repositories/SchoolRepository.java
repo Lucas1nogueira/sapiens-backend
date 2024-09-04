@@ -1,6 +1,5 @@
 package com.sapiens.sapiens.repositories;
 
-import java.util.List;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -13,14 +12,14 @@ public interface SchoolRepository extends JpaRepository<School, Long> {
 
     Optional<School> findByAdminId(Long id);
 
-    List<School> findBySecretariatId(Long id);
+    Optional<School> findBySecretariatId(Long id);
 
-    List<School> findByStudentsId(Long id);
+    Optional<School> findByStudentsId(Long id);
 
-    List<School> findByTeachersId(Long id);
+    Optional<School> findByTeachersId(Long id);
 
-    List<School> findByDisciplinesCode(String code);
+    Optional<School> findByDisciplinesCode(String code);
 
-    List<School> findBySchoolClassesCode(String code);
+    Optional<School> findBySchoolClassesCode(String code);
 
 }
