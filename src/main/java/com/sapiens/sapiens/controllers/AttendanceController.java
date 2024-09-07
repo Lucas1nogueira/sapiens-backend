@@ -29,9 +29,9 @@ public class AttendanceController {
         return attendanceService.saveMany(attendances);
     }
 
-    @DeleteMapping("/delete")
-    public ResponseEntity<?> delete(@RequestBody Attendance attendance) {
-        return attendanceService.delete(attendance);
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<?> delete(@PathVariable("id") Long id) {
+        return attendanceService.delete(id);
     }
 
     @GetMapping("/all")

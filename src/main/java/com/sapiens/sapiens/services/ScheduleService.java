@@ -42,8 +42,8 @@ public class ScheduleService {
         return ResponseEntity.ok().body(scheduleRepository.save(schedule));
     }
 
-    public ResponseEntity<?> delete(Schedule schedule) {
-        scheduleRepository.delete(schedule);
+    public ResponseEntity<?> delete(Long id) {
+        scheduleRepository.deleteById(id);
         return ResponseEntity.ok().body("Horário excluído com sucesso.");
     }
 

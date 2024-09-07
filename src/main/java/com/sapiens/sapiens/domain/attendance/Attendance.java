@@ -1,5 +1,6 @@
 package com.sapiens.sapiens.domain.attendance;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.sapiens.sapiens.domain.lesson.Lesson;
 import com.sapiens.sapiens.domain.student.Student;
 import jakarta.persistence.Entity;
@@ -30,6 +31,7 @@ public class Attendance {
     @ManyToOne(fetch = FetchType.EAGER)
     private Lesson lesson;
 
+    @JsonProperty("isPresent")
     private boolean isPresent;
     private int attendedCount;
 
