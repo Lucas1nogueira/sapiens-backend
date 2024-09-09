@@ -54,4 +54,9 @@ public class StudentController {
         return studentService.findBySchoolId(id);
     }
 
+    @GetMapping("/report/{id}")
+    public ResponseEntity<?> report(@PathVariable("id") Long id) {
+        return studentService.report(id);
+    }
+
 }

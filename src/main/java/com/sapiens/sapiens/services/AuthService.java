@@ -53,6 +53,18 @@ public class AuthService implements UserDetailsService {
         return ResponseEntity.ok().build();
     }
 
+    public ResponseEntity<?> updateUserRistred(User user) {
+        var userDB = authRepository.findUserByEmail(user.getEmail())
+                .orElseThrow(() -> new AuthException("Usuário não encontrado."));
+
+        userDB.setName(user.getName());
+        userDB.setRole(user.getRole());
+        String encryptedPassword = new BCryptPasswordEncoder().encode(user.getPassword());
+        userDB.setPassword(encryptedPassword);
+
+        return ResponseEntity.ok().body(authRepository.save(userDB));
+    }
+
     // public ResponseEntity<?> refreshToken() {
     // return ResponseEntity.ok().body(tokenService.refreshToken());
     // }
