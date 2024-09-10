@@ -37,11 +37,6 @@ public class AuthController {
         return authService.updateUserRistred(user);
     }
 
-    // @PostMapping("/refresh")
-    // public ResponseEntity<?> refreshToken() {
-    // return authService.refreshToken();
-    // }
-
     @PostMapping("/change-password")
     public ResponseEntity<?> changePassword(@RequestBody ChangePasswordRequest user) {
         return authService.changePassword(user);

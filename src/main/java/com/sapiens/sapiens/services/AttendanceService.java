@@ -17,7 +17,22 @@ public class AttendanceService {
     }
 
     public ResponseEntity<?> saveMany(Iterable<Attendance> attendances) {
-        return ResponseEntity.ok().body(attendanceRepository.saveAll(attendances));
+
+        for (Attendance attendance : attendances) {
+            attendanceRepository
+                    .findByStudentIdAndLessonId(attendance.getStudent().getId(), attendance.getLesson().getId())
+                    .ifPresentOrElse(
+                            (existingAttendance) -> {
+                                existingAttendance.setAttendedCount(attendance.getAttendedCount());
+                                existingAttendance.setPresent(attendance.isPresent());
+                                attendanceRepository.save(existingAttendance);
+                            },
+                            () -> {
+                                attendanceRepository.save(attendance);
+                            });
+        }
+
+        return ResponseEntity.ok().build();
     }
 
     public ResponseEntity<?> delete(Long id) {

@@ -18,9 +18,12 @@ public class DisciplineService {
         return ResponseEntity.ok().body(disciplineRepository.save(discipline));
     }
 
-    public ResponseEntity<?> update(Discipline discipline) {
-        Discipline disciplineDb = disciplineRepository.getReferenceById(discipline.getCode());
+    public ResponseEntity<?> update(String code, Discipline discipline) {
+        Discipline disciplineDb = disciplineRepository.getReferenceById(code);
 
+        disciplineRepository.deleteById(code);
+
+        disciplineDb.setCode(discipline.getCode());
         disciplineDb.setName(discipline.getName());
         disciplineDb.setManyLessons(discipline.getManyLessons());
         disciplineDb.setManyHours(discipline.getManyHours());

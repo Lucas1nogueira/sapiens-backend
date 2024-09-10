@@ -65,10 +65,6 @@ public class AuthService implements UserDetailsService {
         return ResponseEntity.ok().body(authRepository.save(userDB));
     }
 
-    // public ResponseEntity<?> refreshToken() {
-    // return ResponseEntity.ok().body(tokenService.refreshToken());
-    // }
-
     public ResponseEntity<?> changePassword(ChangePasswordRequest user) {
         var userDB = authRepository.findUserByEmail(user.email())
                 .orElseThrow(() -> new AuthException("Usuário não encontrado."));

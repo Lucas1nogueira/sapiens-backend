@@ -12,7 +12,7 @@ import java.time.ZoneOffset;
 @Component
 public class TokenService {
     private static final String secret = "sapiens";
-    private static final int TOKEN_EXPIRATION_HOURS = 2;
+    private static final int TOKEN_EXPIRATION_IN_DAYS = 45;
 
     public String generateToken(String email) {
         try {
@@ -47,7 +47,7 @@ public class TokenService {
 
     private Instant generateExpirationDate() {
         return LocalDateTime.now()
-                .plusHours(TOKEN_EXPIRATION_HOURS).toInstant(ZoneOffset.of("-03:00"));
+                .plusDays(TOKEN_EXPIRATION_IN_DAYS).toInstant(ZoneOffset.of("-03:00"));
     }
 
 }

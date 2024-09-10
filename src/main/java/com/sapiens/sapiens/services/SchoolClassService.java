@@ -74,7 +74,7 @@ public class SchoolClassService {
 
             if (shouldRemove) {
                 discipline.setSchoolClass(null);
-                disciplineService.update(discipline);
+                disciplineService.update(discipline.getCode(), discipline);
             }
 
             return shouldRemove;
@@ -82,7 +82,7 @@ public class SchoolClassService {
 
         schoolClass.getDisciplines().forEach(discipline -> {
             discipline.setSchoolClass(schoolClassDb);
-            disciplineService.update(discipline);
+            disciplineService.update(discipline.getCode(), discipline);
         });
 
         return ResponseEntity.ok().body(schoolClassRepository.save(schoolClassDb));

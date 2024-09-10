@@ -25,9 +25,9 @@ public class DisciplineController {
         return disciplineService.save(discipline);
     }
 
-    @PutMapping("/update")
-    public ResponseEntity<?> update(@RequestBody Discipline discipline) {
-        return disciplineService.update(discipline);
+    @PutMapping("/update/{code}")
+    public ResponseEntity<?> update(@PathVariable("code") String code, @RequestBody Discipline discipline) {
+        return disciplineService.update(code, discipline);
     }
 
     @DeleteMapping("/delete/{code}")

@@ -1,5 +1,7 @@
 package com.sapiens.sapiens.services;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,10 +10,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import com.sapiens.sapiens.domain.attendance.Attendance;
 import com.sapiens.sapiens.domain.discipline.Discipline;
+import com.sapiens.sapiens.domain.grade.Grade;
 import com.sapiens.sapiens.domain.lesson.Lesson;
 import com.sapiens.sapiens.domain.student.Report;
 import com.sapiens.sapiens.domain.student.Student;
 import com.sapiens.sapiens.domain.student.Subject;
+import com.sapiens.sapiens.domain.student.SubjectGrade;
 import com.sapiens.sapiens.infra.exceptions.BusinessException;
 import com.sapiens.sapiens.repositories.StudentRepository;
 import lombok.AllArgsConstructor;
@@ -65,8 +69,9 @@ public class StudentService {
         return ResponseEntity.ok().body(studentRepository.findBySchoolId(id));
     }
 
-    private int getLessonsAttended(Discipline discipline, Student student) {
-        int lessonsAttended = 0;
+    private List<Integer> getLessonsAttended(Discipline discipline, Student student) {
+        int lessonsAttendedByStudent = 0;
+        int lessonsAttendedByDiscipline = 0;
 
         List<Lesson> allLessons = discipline.getLessons();
 
@@ -79,11 +84,25 @@ public class StudentService {
             Integer attendanceCount = studentAttendancesMap.get(lesson.getId());
 
             if (attendanceCount != null) {
-                lessonsAttended += attendanceCount;
+                lessonsAttendedByStudent += attendanceCount;
             }
+
+            lessonsAttendedByDiscipline += lesson.getManyLessons();
         }
 
-        return lessonsAttended;
+        return new ArrayList<>(List.of(lessonsAttendedByStudent, lessonsAttendedByDiscipline));
+    }
+
+    private double calculateFinalGrade(Student student, Discipline discipline) {
+        var studentGrades = discipline.getEvaluations().stream()
+                .flatMap(evaluation -> evaluation.getGrades().stream())
+                .filter(grade -> grade.getStudent().getName().equals(student.getName()))
+                .mapToDouble(Grade::getValue)
+                .toArray();
+
+        double finalGrade = Arrays.stream(studentGrades).average().orElse(0.0);
+
+        return finalGrade;
     }
 
     public ResponseEntity<?> report(Long id) {
@@ -95,13 +114,19 @@ public class StudentService {
 
         var disciplines = student.getSchoolClass().getDisciplines();
 
+        List<SubjectGrade> studentGrades = student.getGrades().stream()
+                .map(grade -> new SubjectGrade(grade.getId(), grade.getValue(), grade.getEvaluation())).toList();
+
         var subjects = disciplines.stream().map(discipline -> {
+            var attendances = getLessonsAttended(discipline, student);
             int manyLessons = discipline.getManyLessons();
-            int lessonsAttended = getLessonsAttended(discipline, student);
-            int lessonsMissed = manyLessons - lessonsAttended;
+            int lessonsAttended = attendances.get(0);
+            int lessonsMissed = lessonsAttended == 0 ? 0 : manyLessons - lessonsAttended;
             double attendancePercentage = (double) lessonsAttended / manyLessons * 100.0;
-            double finalGrade = 0.0;
-            String status = "EM DESENVOLVIMENTO";
+
+            String status = manyLessons == attendances.get(1) ? "Concluído" : "Cursando";
+
+            double finalGrade = calculateFinalGrade(student, discipline);
 
             return new Subject(
                     discipline.getCode(),
@@ -112,7 +137,7 @@ public class StudentService {
                     attendancePercentage,
                     status,
                     finalGrade,
-                    student.getGrades());
+                    studentGrades);
         }).toList();
 
         var report = new Report(student.getName(), student.getMatriculation(), subjects);

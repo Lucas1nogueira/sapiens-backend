@@ -1,7 +1,6 @@
 package com.sapiens.sapiens.domain.student;
 
 import java.util.List;
-import com.sapiens.sapiens.domain.grade.Grade;
 
 public record Subject(
 		String disciplineCode,
@@ -12,5 +11,5 @@ public record Subject(
 		double attendancePercentage,
 		String status,
 		double finalGrade,
-		List<Grade> grades) {
+		List<SubjectGrade> grades) {
 }
