@@ -125,6 +125,7 @@ public class DataInitializer implements CommandLineRunner {
         teacher.setPassword(encoder.encode(password));
         teacher.setRole(UserRole.TEACHER);
         teacher.setSchool(school);
+        teacher.setCode("2024ABC0" + (teacherRepository.count() + 1));
         return teacher;
     }
 
@@ -178,6 +179,7 @@ public class DataInitializer implements CommandLineRunner {
         student0.setRole(UserRole.STUDENT);
         student0.setSchool(school);
         student0.setSchoolClass(schoolClass);
+        student0.setMatriculation("2024A001");
 
         var student1 = new Student();
         student1.setName("Kaio");
@@ -186,6 +188,7 @@ public class DataInitializer implements CommandLineRunner {
         student1.setRole(UserRole.STUDENT);
         student1.setSchool(school);
         student1.setSchoolClass(schoolClass);
+        student1.setMatriculation("2024A002");
 
         var student2 = new Student();
         student2.setName("Lucas");
@@ -194,6 +197,7 @@ public class DataInitializer implements CommandLineRunner {
         student2.setRole(UserRole.STUDENT);
         student2.setSchool(school);
         student2.setSchoolClass(schoolClass);
+        student2.setMatriculation("2024A003");
 
         studentRepository.saveAll(List.of(student0, student1, student2));
     }
