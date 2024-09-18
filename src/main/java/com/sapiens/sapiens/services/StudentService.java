@@ -1,6 +1,5 @@
 package com.sapiens.sapiens.services;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -69,9 +68,14 @@ public class StudentService {
         return ResponseEntity.ok().body(studentRepository.findBySchoolId(id));
     }
 
-    private List<Integer> getLessonsAttended(Discipline discipline, Student student) {
+    private int getCompletedLessons(Discipline discipline) {
+        return discipline.getLessons().stream()
+                .mapToInt(lesson -> lesson.getManyLessons())
+                .sum();
+    }
+
+    private int getLessonsAttendedByStudent(Discipline discipline, Student student) {
         int lessonsAttendedByStudent = 0;
-        int lessonsAttendedByDiscipline = 0;
 
         List<Lesson> allLessons = discipline.getLessons();
 
@@ -87,10 +91,9 @@ public class StudentService {
                 lessonsAttendedByStudent += attendanceCount;
             }
 
-            lessonsAttendedByDiscipline += lesson.getManyLessons();
         }
 
-        return new ArrayList<>(List.of(lessonsAttendedByStudent, lessonsAttendedByDiscipline));
+        return lessonsAttendedByStudent;
     }
 
     private double calculateFinalGrade(Student student, Discipline discipline) {
@@ -118,21 +121,26 @@ public class StudentService {
                 .map(grade -> new SubjectGrade(grade.getId(), grade.getValue(), grade.getEvaluation())).toList();
 
         var subjects = disciplines.stream().map(discipline -> {
-            var attendances = getLessonsAttended(discipline, student);
             int manyLessons = discipline.getManyLessons();
-            int lessonsAttended = attendances.get(0);
-            int lessonsMissed = lessonsAttended == 0 ? 0 : manyLessons - lessonsAttended;
-            double attendancePercentage = (double) lessonsAttended / manyLessons * 100.0;
 
-            String status = manyLessons == attendances.get(1) ? "Concluído" : "Cursando";
+            int completedLessonsByDiscipline = getCompletedLessons(discipline);
+            int lessonsAttendedByStudent = getLessonsAttendedByStudent(discipline, student);
 
-            double finalGrade = calculateFinalGrade(student, discipline);
+            var isCompleted = manyLessons == completedLessonsByDiscipline;
+
+            String status = isCompleted ? "Concluído" : "Cursando";
+            double finalGrade = isCompleted ? calculateFinalGrade(student, discipline) : 0.0;
+
+            int lessonsMissed = completedLessonsByDiscipline - lessonsAttendedByStudent;
+
+            double attendancePercentage = 100.0 - ((double) lessonsMissed / manyLessons * 100.0);
 
             return new Subject(
                     discipline.getCode(),
                     discipline.getName(),
                     manyLessons,
-                    lessonsAttended,
+                    completedLessonsByDiscipline,
+                    lessonsAttendedByStudent,
                     lessonsMissed,
                     attendancePercentage,
                     status,

@@ -6,6 +6,7 @@ public record Subject(
 		String disciplineCode,
 		String disciplineName,
 		int manyLessons,
+		int completedLessons,
 		int lessonsAttended,
 		int lessonsMissed,
 		double attendancePercentage,
