@@ -117,9 +117,6 @@ public class StudentService {
 
         var disciplines = student.getSchoolClass().getDisciplines();
 
-        List<SubjectGrade> studentGrades = student.getGrades().stream()
-                .map(grade -> new SubjectGrade(grade.getId(), grade.getValue(), grade.getEvaluation())).toList();
-
         var subjects = disciplines.stream().map(discipline -> {
             int manyLessons = discipline.getManyLessons();
 
@@ -135,6 +132,12 @@ public class StudentService {
 
             double attendancePercentage = 100.0 - ((double) lessonsMissed / manyLessons * 100.0);
 
+            var grades = discipline.getEvaluations().stream()
+                    .flatMap(evaluation -> evaluation.getGrades().stream())
+                    .filter(grade -> grade.getStudent().getId() == student.getId())
+                    .map(grade -> new SubjectGrade(grade.getId(), grade.getValue(), grade.getEvaluation()))
+                    .toList();
+
             return new Subject(
                     discipline.getCode(),
                     discipline.getName(),
@@ -145,7 +148,7 @@ public class StudentService {
                     attendancePercentage,
                     status,
                     finalGrade,
-                    studentGrades);
+                    grades);
         }).toList();
 
         var report = new Report(student.getName(), student.getMatriculation(), subjects);
